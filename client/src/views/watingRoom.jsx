@@ -18,7 +18,7 @@ function WaitingRoom() {
       setData(data.data);
     });
   }, []);
-  // console.log(IsGameMaster);
+  console.log(data);
   return (
     <>
       <section className="w-full h-fit bg-purple-500 flex p-10 items-center flex-col relative">

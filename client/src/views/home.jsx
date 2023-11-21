@@ -41,13 +41,13 @@ function RoomList() {
           <form className="flex absolute top-[13%]">
             <input className="px-5 py-2 w-[400px] rounded-s-md" type="text" />
             <button className="px-3 py-2 bg-slate-600 text-white">
-              <i class="fa-solid fa-magnifying-glass fa-rotate-90"></i>
+              <i className="fa-solid fa-magnifying-glass fa-rotate-90"></i>
             </button>
           </form>
 
           {/* create room */}
           <Link to="/createRoom" className="absolute top-[13%] right-20 px-3 py-2 bg-white">
-            <i class="fa-solid fa-plus"></i>
+            <i className="fa-solid fa-plus"></i>
           </Link>
 
           {/* list */}
