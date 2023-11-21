@@ -16,7 +16,18 @@ module.exports = (sequelize, DataTypes) => {
   }
   Player.init(
     {
-      username: DataTypes.STRING,
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Username is requIred",
+          },
+          notNull: {
+            msg: "Username is requIred",
+          },
+        },
+      },
     },
     {
       sequelize,

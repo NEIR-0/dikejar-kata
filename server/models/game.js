@@ -15,10 +15,59 @@ module.exports = (sequelize, DataTypes) => {
   }
   Game.init(
     {
-      title: DataTypes.STRING,
-      language: DataTypes.STRING,
-      status: DataTypes.STRING,
-      GameMasterId: DataTypes.INTEGER,
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Title is required",
+          },
+          notEmpty: {
+            msg: "Title is required",
+          },
+        },
+      },
+      language: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Language is required",
+          },
+          notEmpty: {
+            msg: "Language is required",
+          },
+        },
+      },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "waiting",
+        validate: {
+          notEmpty: {
+            msg: "Status is required",
+          },
+          notNull: {
+            msg: "Status is required",
+          },
+        },
+      },
+      GameMasterId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Players",
+          key: "id",
+        },
+        validate: {
+          notNull: {
+            msg: "Title is required",
+          },
+          notEmpty: {
+            msg: "Title is required",
+          },
+        },
+      },
     },
     {
       sequelize,
