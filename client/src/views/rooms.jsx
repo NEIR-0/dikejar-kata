@@ -19,7 +19,7 @@ function RoomPlayer() {
   return (
     <>
       {data.status === "waiting" && <WaitingRoom data={data} player={player} />}
-      {data.status === "playing" && <WaitingRoom data={data} player={player} />}
+      {/* {data.status === "playing" && <WaitingRoom data={data} player={player} />} */}
       {/* {data.status === "ended" && <WaitingRoom data={data} player={player} />} */}
     </>
   );
