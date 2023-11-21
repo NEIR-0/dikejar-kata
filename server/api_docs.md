@@ -46,6 +46,7 @@ _GameResult_
 
 List of available endpoints:
 
+- `GET /checkSession/:gameId`
 - `POST /register`
 - `GET /games`
 - `POST /games`
@@ -137,10 +138,11 @@ _Response (200 - OK)_
   "games": [
     {
       "id": "number",
+      "title": "string",
       "language": "id | en",
       "gameMaster": {
         "username": "string"
-      }
+      },
     },
     ...
   ]
@@ -227,16 +229,9 @@ _Response (200 - OK)_
   "data": {
     "title": "string",
     "players": ["string", ...],
+    "language": "id | en",
     "status": "playing | waiting | ended"
   },
-}
-```
-
-_Response (401 - Unauthorized)_
-
-```json
-{
-  "message": "Not registered"
 }
 ```
 

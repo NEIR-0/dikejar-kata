@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Game.hasMany(models.GamePlayer);
       Game.hasOne(models.GameResult);
+      Game.belongsTo(models.Player, {as: 'gameMaster', foreignKey: "GameMasterId"})
+      Game.belongsToMany(models.Player, { through: models.GamePlayer, as: "players" })
     }
   }
   Game.init(

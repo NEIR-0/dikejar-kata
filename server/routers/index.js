@@ -8,6 +8,8 @@ const router = express.Router();
 router.post("/register", PlayerController.register);
 router.get("/games", [mustLogin], GameController.getGames);
 router.post("/games", [mustLogin], GameController.createGame);
+router.get("/games/:gameId", [mustLogin], GameController.getGame);
+
 router.use(errorHandlers);
 
 module.exports = router;
