@@ -128,7 +128,9 @@ module.exports = class GameController {
         throw { name: "notFound", message: "Game not found" };
       }
 
-      const playerIndex = selectedGame.players.findIndex((player) => player.id === userId);
+      const playerIndex = selectedGame.players.findIndex((player) => {
+        return player.GamePlayer.PlayerId == userId
+      });
 
       if (playerIndex === -1) {
         throw { name: "unauthorized", message: "Not registered" };

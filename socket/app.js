@@ -17,35 +17,49 @@ const io = socketIo(server, {
 
 
 io.on("connection", (socket) => {
-  console.log("client connected: ", socket.id);
-
-  socket.on('CLIENT_JOIN', async(params) => {
-    const {gameId, access_token} = params
-    console.log(gameId, access_token);
-
-    // check ke db apakah sudah pernah join sebelumnya
-    try {
-    const {data}= await axios.get("http://localhost:3000/games/" + gameId, {
-        headers: {
-            authorization: "Bearer " + access_token
+    console.log("client connected: ", socket.id);
+    socket.on('CLIENT_JOIN', async(params) => {
+        const {gameId, access_token} = params
+        console.log(gameId, access_token);
+        // check ke db apakah sudah pernah join sebelumnya
+        try {
+            console.log(gameId, "<<<<");
+            const {data}= await axios.get("http://localhost:3000/games/" + gameId, {
+                headers: {
+                    authorization: "Bearer " + access_token
+                }
+            })
+            socket.join(gameId);
+            io.to(gameId).emit('SERVER_JOINED',data);
+        } catch (error) {
+            // room penuh
+            console.log(error);
         }
+
     })
 
-    socket.join(gameId);
-    io.to(gameId).emit('SERVER_JOINED',data);
-
-
-    } catch (error) {
-        // room penuh
-        console.log(error);
-    }
-
+    socket.on('CLIENT_START', async(params) =>{
+        const {gameId, access_token} = params
+        console.log(gameId, access_token, "<<<<<client start");
+        try {
+            const {data}= await axios.get(`http://localhost:3000/games/${gameId}/start`, {
+                headers: {
+                    Authorization: "Bearer " + access_token
+                }
+            })
+            console.log(data);
+            io.to(gameId).emit('SERVER_STARTED',data);
+        } catch (error) {
+            console.log(error);
+        }
     })
 
   socket.on("disconnect", (reason) => {
     console.log(reason);
   });
 });
+
+
 
 app.io = io
 
