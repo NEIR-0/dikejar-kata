@@ -30,22 +30,21 @@ const router = createBrowserRouter([
         element: <RoomList />,
         loader: auth,
       },
-      // WaitingRoom
       {
-        path: "WaitingRoom",
+        path: "games/:gameId",
         element: <WaitingRoom />,
         loader: auth,
       },
-      {
-        path: "gameStart",
-        element: <GamePlay />,
-        loader: auth,
-      },
-      {
-        path: "Winner",
-        element: <Winner />,
-        loader: auth,
-      },
+      // {
+      //   path: "gameStart",
+      //   element: <GamePlay />,
+      //   loader: auth,
+      // },
+      // {
+      //   path: "Winner",
+      //   element: <Winner />,
+      //   loader: auth,
+      // },
     ],
   },
 ]);
