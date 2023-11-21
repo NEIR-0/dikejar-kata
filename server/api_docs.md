@@ -1,6 +1,6 @@
 # Lodging API Documentation
 
-GCP IP: 
+GCP IP:
 
 DOMAIN:
 
@@ -54,10 +54,9 @@ List of available endpoints:
 - `GET /games/:gameId/start`
 - `GET /games/:gameId/result`
 
-
 &nbsp;
 
-# Routes 
+# Routes
 
 ## 0. GET /checkSession/:gameId
 
@@ -123,10 +122,6 @@ Description:
 
 - Get All available games
 
-parameters:
-
-- gameId: number
-
 headers:
 
 ```json
@@ -149,14 +144,6 @@ _Response (200 - OK)_
     },
     ...
   ]
-}
-```
-
-_Response (401 - Unauthorized)_
-
-```json
-{
-  "message": "Not registered",
 }
 ```
 
@@ -187,8 +174,7 @@ body:
 ```json
 {
   "title": "string",
-  "language": "id | en",
-
+  "language": "id | en"
 }
 ```
 
@@ -204,7 +190,7 @@ _Response (401 - Unauthorized)_
 
 ```json
 {
-  "message": "Not registered",
+  "message": "Not registered"
 }
 ```
 
@@ -240,7 +226,7 @@ _Response (200 - OK)_
 {
   "data": {
     "title": "string",
-    "players": ["string", ...], 
+    "players": ["string", ...],
     "status": "playing | waiting | ended"
   },
 }
@@ -250,7 +236,7 @@ _Response (401 - Unauthorized)_
 
 ```json
 {
-  "message": "Not registered",
+  "message": "Not registered"
 }
 ```
 
@@ -304,7 +290,7 @@ _Response (401 - Unauthorized)_
 
 ```json
 {
-  "message": "Not registered",
+  "message": "Not registered"
 }
 ```
 
@@ -340,7 +326,6 @@ _Response (404 - Not Found)_
 }
 ```
 
-
 ## 6. GET /games/:gameId/result
 
 Description:
@@ -361,7 +346,7 @@ _Response (401 - Unauthorized)_
 
 ```json
 {
-  "message": "Not registered",
+  "message": "Not registered"
 }
 ```
 
