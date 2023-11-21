@@ -4,7 +4,7 @@ GCP IP:
 
 DOMAIN:
 
-Test using Postman (import):
+Test using Postman (import): https://api.postman.com/collections/11206461-9105a897-a0f0-4865-961c-e5a1773e7044?access_key=PMAT-01HFRGDM1FP34PVVBRGTMD7GKK
 
 &nbsp;
 
