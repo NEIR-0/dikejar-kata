@@ -9,6 +9,7 @@ import WaitingRoom from "./views/watingRoom.jsx";
 import Winner from "./views/winner.jsx";
 import GamePlay from "./views/gameplay.jsx";
 import CreateRoom from "./views/createRoom.jsx";
+import UjiCoba from "./views/ujicoba.jsx";
 
 const auth = () => {
   if (!localStorage.access_token) {
@@ -41,11 +42,12 @@ const router = createBrowserRouter([
         element: <WaitingRoom />,
         loader: auth,
       },
-      // {
-      //   path: "gameStart",
-      //   element: <GamePlay />,
-      //   loader: auth,
-      // },
+      {
+        path: "gameStart",
+        // element: <GamePlay />,
+        element: <UjiCoba />,
+        loader: auth,
+      },
       // {
       //   path: "Winner",
       //   element: <Winner />,
