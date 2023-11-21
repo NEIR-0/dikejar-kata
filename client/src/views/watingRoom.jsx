@@ -18,6 +18,13 @@ function WaitingRoom() {
       setData(data.data);
     });
   }, []);
+
+  const start = async()=> {
+    socket.emit("CLIENT_START", { gameId, access_token: localStorage.access_token });
+    socket.on("SERVER_STARTED", (data) => {
+      console.log(data.data, "<<<<<< INI DI START");
+    });
+  }
   console.log(data.isGameMaster);
   return (
     <>
@@ -34,7 +41,7 @@ function WaitingRoom() {
         {/* start */}
         {data.isGameMaster === true ? (
           <div className="w-[70%] my-4">
-            <button className="px-16 py-3 bg-blue-600">Start</button>
+            <button onClick={start} className="px-16 py-3 bg-blue-600">Start</button>
           </div>
         ) : (
           ""
