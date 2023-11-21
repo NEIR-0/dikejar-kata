@@ -3,10 +3,15 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "../component/backButton";
 import TableRoom from "../component/tableRoom";
-
+import { io } from "socket.io-client";
+import socket from "../socket";
 function WaitingRoom() {
-  const params = useParams();
-  useEffect(() => {}, []);
+  const { gameId } = useParams();
+
+  useEffect(() => {
+    socket.emit("join", { gameId, access_token: localStorage.access_token });
+  }, []);
+
   const listPlayer = async (e) => {
     try {
       const axios = await axios.get("");
@@ -39,7 +44,6 @@ function WaitingRoom() {
               </tr>
             </thead>
             <tbody>
-              <TableRoom />
               <TableRoom />
             </tbody>
           </table>
