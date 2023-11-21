@@ -1,8 +1,7 @@
 const express = require("express");
+const PlayerController = require("../controllers/playerController");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("ello");
-});
+router.post("/register", PlayerController.register);
 
 module.exports = router;
