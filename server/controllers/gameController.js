@@ -94,8 +94,11 @@ module.exports = class GameController {
         },
       });
 
+      let isGameMaster = data.GameMasterId === userId;
+
       data = data.toJSON();
       data.players = data.players.map(({ username }) => username);
+      data.isGameMaster = isGameMaster;
 
       return res.status(200).json({ data });
     } catch (error) {

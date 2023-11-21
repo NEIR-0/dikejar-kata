@@ -230,7 +230,9 @@ _Response (200 - OK)_
     "title": "string",
     "players": ["string", ...],
     "language": "id | en",
-    "status": "playing | waiting | ended"
+    "status": "playing | waiting | ended",
+    "GameMasterId": "integer",
+    "isGameMaster": "boolean"
   },
 }
 ```
