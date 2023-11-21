@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import TimerBar from "../component/timerBar";
 import UserCirlces from "../component/userCirlces";
 
 const UjiCoba = () => {
@@ -21,7 +22,11 @@ const UjiCoba = () => {
         <div className="ciclegraph bg-yellow-400">
           <UserCirlces />
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">bom</div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <TimerBar />
+          bom
+          <h1>soal</h1>
+        </div>
       </section>
     </>
   );
