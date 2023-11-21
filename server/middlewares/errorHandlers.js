@@ -3,6 +3,7 @@ function errorHandlers(error, req, res, next) {
     case "unauthorized":
       return res.status(401).json({ message: error.message });
     default:
+      console.log(error);
       return res.status(500).json({ message: "Internal Server Error" });
   }
 }

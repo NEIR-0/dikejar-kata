@@ -190,7 +190,7 @@ _Response (401 - Unauthorized)_
 
 ```json
 {
-  "message": "Not registered"
+  "message": "Please sign in"
 }
 ```
 
