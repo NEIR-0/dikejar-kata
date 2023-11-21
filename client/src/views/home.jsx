@@ -4,13 +4,16 @@ import PopUpCreate from "../component/popupCreate";
 import CardRoom from "../component/roomList";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LogoutBtn from "../component/logout";
 
 function RoomList() {
+  const navigate = useNavigate();
   const [room, setRoom] = useState([]);
   const [show, setShow] = useState(false);
   const popUpCreate = () => {
-    setShow(true);
+    setShow((last) => !last);
   };
+  console.log(show);
 
   useEffect(() => {
     listRoom();
@@ -29,9 +32,16 @@ function RoomList() {
       console.log(error);
     }
   };
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/register");
+  };
+
   return (
     <>
       <section className="w-full h-fit relative">
+        <LogoutBtn logout={logout} />
         <div className="p-5 flex justify-center">
           {/* search */}
           <form className="flex absolute top-[13%]">
@@ -56,7 +66,7 @@ function RoomList() {
         </div>
 
         {/* craeteroom */}
-        {show === true ? <PopUpCreate /> : ""}
+        {show === true ? <PopUpCreate click={popUpCreate} /> : ""}
       </section>
     </>
   );
