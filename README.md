@@ -1,0 +1,1 @@
+"# dikejar-kata" 
