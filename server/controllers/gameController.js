@@ -86,7 +86,7 @@ module.exports = class GameController {
       }
 
       let data = await Game.findByPk(gameId, {
-        attributes: ["id", "title", "language", "status"],
+        attributes: ["id", "title", "language", "status", "GameMasterId"],
         include: {
           model: Player,
           as: "players",
