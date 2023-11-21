@@ -1,13 +1,12 @@
-
-function TableRoom({ data }) {
+function TableRoom({ data, id }) {
   return (
     <>
-      <tr class="bg-white border-b">
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-          Apple MacBook Pro 17"
+      <tr className="bg-white border-b">
+        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+          {id && id}
         </th>
-        <td class="px-6 py-4">Silver</td>
-        <td class="px-6 py-4">
+        <td className="px-6 py-4">{data && data}</td>
+        <td className="px-6 py-4">
           <button className="px-5 py-1 bg-red-600 text-white">x</button>
         </td>
       </tr>
