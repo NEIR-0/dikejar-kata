@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-function PopUpCreate() {
+import BackButton from "./backButton";
+function PopUpCreate({ click }) {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     title: "",
@@ -35,6 +37,7 @@ function PopUpCreate() {
     <>
       {/* form create room */}
       <section className="w-full h-screen bg-red-400 z-20 fixed left-0 top-0 flex justify-center items-center flex-col">
+        <BackButton click={click} />
         <div className="bg-yellow-400 p-10 rounded-md">
           <h1 className="text-[50px] text-center mb-5 text-white font-bold">Create rooms</h1>
           <form onSubmit={submitUser} className="bg-blue-500 p-10">

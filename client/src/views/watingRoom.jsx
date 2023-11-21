@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import BackButton from "../component/backButton";
 import TableRoom from "../component/tableRoom";
 
 function WaitingRoom() {
@@ -15,7 +16,8 @@ function WaitingRoom() {
   };
   return (
     <>
-      <section className="w-full h-screen bg-purple-500 flex p-10 items-center flex-col">
+      <section className="w-full h-fit bg-purple-500 flex p-10 items-center flex-col relative">
+        <BackButton />
         <h1 className="text-[100px]">Waiting Rooms</h1>
         {/* start */}
         <div className="w-[70%] my-4">
@@ -37,6 +39,7 @@ function WaitingRoom() {
               </tr>
             </thead>
             <tbody>
+              <TableRoom />
               <TableRoom />
             </tbody>
           </table>
