@@ -1,4 +1,6 @@
 import { useState } from "react";
+import PopUpCreate from "../component/popupCreate";
+import CardRoom from "../component/roomList";
 
 function RoomList() {
   return (
@@ -18,43 +20,12 @@ function RoomList() {
 
           {/* list */}
           <div className="mt-[10%] w-full h-fit bg-yellow-300 p-2 flex flex-wrap justify-center">
-            <div className="w-[400px] h-[250px] bg-white flex justify-center items-center flex-col m-2">
-              <h1 className="text-[40px]">title</h1>
-              <h1 className="text-[40px]">bahasa</h1>
-              <button className="px-24 py-2 bg-lime-300 mt-5">Join</button>
-            </div>
-            <div className="w-[400px] h-[250px] bg-white flex justify-center items-center flex-col m-2">
-              <h1 className="text-[40px]">title</h1>
-              <h1 className="text-[40px]">bahasa</h1>
-              <button className="px-24 py-2 bg-lime-300 mt-5">Join</button>
-            </div>
-            <div className="w-[400px] h-[250px] bg-white flex justify-center items-center flex-col m-2">
-              <h1 className="text-[40px]">title</h1>
-              <h1 className="text-[40px]">bahasa</h1>
-              <button className="px-24 py-2 bg-lime-300 mt-5">Join</button>
-            </div>
+            <CardRoom />
           </div>
         </div>
 
-        {/* form create room */}
-        {/* <div className="w-full h-screen bg-red-400 z-20 fixed left-0 top-0 flex justify-center items-center flex-col">
-          <h1 className="text-[50px] text-center">create rooms</h1>
-          <form className="bg-blue-500 p-10">
-            <ul>
-              <li className="flex flex-col">
-                <label htmlFor="">title</label>
-                <input type="text" name="title" />
-              </li>
-              <li className="mt-4">
-                <select className="w-full" name="" id="">
-                  <option value="">Selecet bahasa</option>
-                  <option value="indonesia">Indonesia</option>
-                  <option value="english">english</option>
-                </select>
-              </li>
-            </ul>
-          </form>
-        </div> */}
+        {/* craeteroom */}
+        {/* <PopUpCreate /> */}
       </section>
     </>
   );
