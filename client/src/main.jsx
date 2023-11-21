@@ -10,7 +10,7 @@ import Winner from "./views/winner.jsx";
 import GamePlay from "./views/gameplay.jsx";
 
 const auth = () => {
-  if (!localStorage.username) {
+  if (!localStorage.access_token) {
     return redirect("/register");
   }
   return null;
@@ -28,23 +28,23 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <RoomList />,
-        // loader: auth,
+        loader: auth,
       },
       // WaitingRoom
       {
         path: "WaitingRoom",
         element: <WaitingRoom />,
-        // loader: auth,
+        loader: auth,
       },
       {
         path: "gameStart",
         element: <GamePlay />,
-        // loader: auth,
+        loader: auth,
       },
       {
         path: "Winner",
         element: <Winner />,
-        // loader: auth,
+        loader: auth,
       },
     ],
   },
