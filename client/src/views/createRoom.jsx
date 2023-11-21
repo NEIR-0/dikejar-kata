@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import BackButton from "./backButton";
-function PopUpCreate({ click }) {
+import BackButton from "../component/backButton";
+function CreateRoom() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     title: "",
@@ -37,7 +37,7 @@ function PopUpCreate({ click }) {
     <>
       {/* form create room */}
       <section className="w-full h-screen bg-red-400 z-20 fixed left-0 top-0 flex justify-center items-center flex-col">
-        <BackButton click={click} />
+        <BackButton />
         <div className="bg-yellow-400 p-10 rounded-md">
           <h1 className="text-[50px] text-center mb-5 text-white font-bold">Create rooms</h1>
           <form onSubmit={submitUser} className="bg-blue-500 p-10">
@@ -57,7 +57,9 @@ function PopUpCreate({ click }) {
               </li>
             </ul>
             <div className="w-full flex justify-center items-center">
-              <button className="w-[200px] px-4 py-2 bg-white mt-4 rounded-md m-auto">submit</button>
+              <button type="submit" className="w-[200px] px-4 py-2 bg-white mt-4 rounded-md m-auto">
+                submit
+              </button>
             </div>
           </form>
         </div>
@@ -66,4 +68,4 @@ function PopUpCreate({ click }) {
   );
 }
 
-export default PopUpCreate;
+export default CreateRoom;
