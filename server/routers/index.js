@@ -9,6 +9,7 @@ router.post("/register", PlayerController.register);
 router.get("/games", [mustLogin], GameController.getGames);
 router.post("/games", [mustLogin], GameController.createGame);
 router.get("/games/:gameId", [mustLogin], GameController.getGame);
+router.get("/games/:gameId/start", [mustLogin], GameController.startGame);
 
 router.use(errorHandlers);
 

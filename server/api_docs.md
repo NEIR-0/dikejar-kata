@@ -277,7 +277,12 @@ _Response (200 - OK)_
 
 ```json
 {
-  "startIndex": "number"
+  "data": {
+    "title": "string",
+    "players": ["string", ...],
+    "language": "id | en",
+    "status": "playing"
+  },
 }
 ```
 
@@ -301,7 +306,7 @@ _Response (403 - Forbidden)_
 
 ```json
 {
-  "message": "Forbidden"
+  "message": "You are not the game master"
 }
 ```
 
