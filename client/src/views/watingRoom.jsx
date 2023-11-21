@@ -9,7 +9,11 @@ function WaitingRoom() {
   const { gameId } = useParams();
 
   useEffect(() => {
-    socket.emit("join", { gameId, access_token: localStorage.access_token });
+    socket.emit("CLIENT_JOIN", { gameId, access_token: localStorage.access_token });
+    socket.on("SERVER_JOINED", (data) => {
+      console.log(data);
+    });
+
   }, []);
 
   const listPlayer = async (e) => {
