@@ -1,19 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import PopUpCreate from "../component/popupCreate";
 import CardRoom from "../component/roomList";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoutBtn from "../component/logout";
 
 function RoomList() {
   const navigate = useNavigate();
   const [room, setRoom] = useState([]);
-  const [show, setShow] = useState(false);
-  const popUpCreate = () => {
-    setShow((last) => !last);
-  };
-  console.log(show);
 
   useEffect(() => {
     listRoom();
@@ -52,9 +46,9 @@ function RoomList() {
           </form>
 
           {/* create room */}
-          <button onClick={popUpCreate} className="absolute top-[13%] right-20 px-3 py-2 bg-white">
+          <Link to="/createRoom" className="absolute top-[13%] right-20 px-3 py-2 bg-white">
             <i class="fa-solid fa-plus"></i>
-          </button>
+          </Link>
 
           {/* list */}
           <div className="mt-[10%] w-full h-fit p-2 flex flex-wrap justify-center">
@@ -64,9 +58,6 @@ function RoomList() {
               })}
           </div>
         </div>
-
-        {/* craeteroom */}
-        {show === true ? <PopUpCreate click={popUpCreate} /> : ""}
       </section>
     </>
   );

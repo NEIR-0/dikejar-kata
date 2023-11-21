@@ -8,6 +8,7 @@ import RoomList from "./views/home.jsx";
 import WaitingRoom from "./views/watingRoom.jsx";
 import Winner from "./views/winner.jsx";
 import GamePlay from "./views/gameplay.jsx";
+import CreateRoom from "./views/createRoom.jsx";
 
 const auth = () => {
   if (!localStorage.access_token) {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <RoomList />,
+        loader: auth,
+      },
+      {
+        path: "createRoom",
+        element: <CreateRoom />,
         loader: auth,
       },
       {
