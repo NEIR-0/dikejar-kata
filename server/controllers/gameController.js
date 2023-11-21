@@ -25,7 +25,11 @@ module.exports = class GameController {
 
       const { userId } = req;
 
-      await Game.create({ title, language, GameMasterId: userId });
+      const createdGame = await Game.create({ title, language, GameMasterId: userId });
+      await GamePlayer.create({
+        GameId: createdGame.id,
+        PlayerId: userId,
+      });
 
       return res.status(200).json({ message: "OK" });
     } catch (error) {
@@ -64,8 +68,6 @@ module.exports = class GameController {
         },
       });
 
-      console.log(selectedGame);
-
       if (status !== "waiting") {
         if (!selectedGamePlayer) throw { name: "notFound", message: "Game already started / ended" };
       }
@@ -73,7 +75,6 @@ module.exports = class GameController {
       const players = selectedGame.players;
 
       if (!selectedGamePlayer) {
-        console.log(players);
         if (players.length > 7) {
           throw { name: "forbidden", message: "Room full" };
         }
@@ -99,6 +100,47 @@ module.exports = class GameController {
       return res.status(200).json({ data });
     } catch (error) {
       next(error);
+    }
+  }
+
+  static async startGame(req, res, next) {
+    try {
+      const { gameId } = req.params;
+      const { userId } = req;
+
+      if (!gameId) {
+        throw { name: "notFound", message: "Game not found" };
+      }
+
+      const selectedGame = await Game.findByPk(gameId, {
+        attributes: ["id", "GameMasterId", "status", "language", "title"],
+        include: {
+          model: Player,
+          as: "players",
+          attributes: ["username"],
+        },
+      });
+
+      if (!selectedGame) {
+        throw { name: "notFound", message: "Game not found" };
+      }
+
+      if (selectedGame.GameMasterId != userId) {
+        throw { name: "forbidden", message: "You are not the game master" };
+      }
+
+      if (selectedGame.status !== "waiting") {
+        throw { name: "notFound", message: "Game already started / ended" };
+      }
+
+      await selectedGame.update({ status: "playing" });
+
+      const data = selectedGame.toJSON();
+      data.players = data.players.map(({ username }) => username);
+
+      return res.status(200).json({ data: data });
+    } catch (error) {
+      return next(error);
     }
   }
 };
