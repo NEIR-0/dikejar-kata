@@ -5,6 +5,12 @@ module.exports = class GameController {
     try {
       const games = await Game.findAll({
         where: { status: "waiting" },
+        attributes: ["id", "language", "title"],
+        include: {
+          model: Player,
+          attributes: ["username"],
+          as: "gameMaster",
+        },
       });
 
       return res.status(200).json({ games });
