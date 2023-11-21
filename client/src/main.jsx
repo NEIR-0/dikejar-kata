@@ -5,11 +5,11 @@ import "./index.css";
 import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import Register from "./views/register.jsx";
 import RoomList from "./views/home.jsx";
-import WaitingRoom from "./views/watingRoom.jsx";
-import Winner from "./views/winner.jsx";
-import GamePlay from "./views/gameplay.jsx";
 import CreateRoom from "./views/createRoom.jsx";
 import UjiCoba from "./views/ujicoba.jsx";
+import RoomPlayer from "./views/rooms.jsx";
+import Winner from "./views/winner.jsx";
+import GamePlay from "./views/gameplay.jsx";
 
 const auth = () => {
   if (!localStorage.access_token) {
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "games/:gameId",
-        element: <WaitingRoom />,
+        element: <RoomPlayer />,
         loader: auth,
       },
       {
@@ -59,6 +59,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-    <RouterProvider router={router} />
+  <RouterProvider router={router} />
   // </React.StrictMode>
 );
