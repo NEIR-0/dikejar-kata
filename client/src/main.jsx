@@ -9,18 +9,17 @@ import WaitingRoom from "./views/watingRoom.jsx";
 import Winner from "./views/winner.jsx";
 import GamePlay from "./views/gameplay.jsx";
 
-// const auth = () => {
-//   if (!localStorage.username) {
-//     return redirect("/register");
-//   }
-//   return null;
-// };
+const auth = () => {
+  if (!localStorage.username) {
+    return redirect("/register");
+  }
+  return null;
+};
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // loader: auth,
     children: [
       {
         path: "register",
@@ -29,19 +28,23 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <RoomList />,
+        // loader: auth,
       },
       // WaitingRoom
       {
         path: "WaitingRoom",
         element: <WaitingRoom />,
+        // loader: auth,
       },
       {
         path: "gameStart",
         element: <GamePlay />,
+        // loader: auth,
       },
       {
         path: "Winner",
         element: <Winner />,
+        // loader: auth,
       },
     ],
   },
