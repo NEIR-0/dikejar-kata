@@ -3,12 +3,12 @@ import { useState } from "react";
 function Register() {
   return (
     <>
-      <section className="w-full h-screen bg-purple-500 flex justify-center items-center">
-        <div className="text-center bg-green-600 p-10">
-          <h1 className="text-[40px]">welcome</h1>
-          <form className=" w-[200px] h-fit bg-red-700 flex flex-col justify-between">
-            <input className="w-full h-[50px] mb-4 px-5 rounded-md" type="text" name="username" />
-            <button className="w-[100px] py-2 bg-blue-500 rounded-md">submit</button>
+      <section className="w-full h-screen flex justify-center items-center bg-[#ecf0f1]">
+        <div className="text-center bg-green-400 p-20 rounded-md shadow-md w-[90%] md:w-fit">
+          <h1 className="text-[25px] mb-10 text-white font-bold md:text-[40px]">Lets have fun!</h1>
+          <form className=" w-[150px] h-fit m-auto">
+            <input className="w-full h-[35px] mb-5 px-5 rounded-md" type="text" name="username" placeholder="username..." />
+            <button className="w-[100px] py-2 bg-orange-400 rounded-md text-white">submit</button>
           </form>
         </div>
       </section>
