@@ -15,8 +15,38 @@ module.exports = (sequelize, DataTypes) => {
   }
   GameResult.init(
     {
-      GameId: DataTypes.INTEGER,
-      WinnerId: DataTypes.INTEGER,
+      GameId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Games",
+          key: "id",
+        },
+        validate: {
+          notNull: {
+            msg: "Game ID is required",
+          },
+          notEmpty: {
+            msg: "Game ID is required",
+          },
+        },
+      },
+      WinnerId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Players",
+          key: "id",
+        },
+        validate: {
+          notNull: {
+            msg: "Winner ID is required",
+          },
+          notEmpty: {
+            msg: "Winner ID is required",
+          },
+        },
+      },
     },
     {
       sequelize,

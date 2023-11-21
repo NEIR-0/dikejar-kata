@@ -9,14 +9,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Player.hasMany(models.Games, { foreignKey: "GameMasterId", as: "gameMaster" });
+      Player.hasMany(models.Game, { foreignKey: "GameMasterId", as: "gameMaster" });
       Player.hasMany(models.GamePlayer, { as: "players" });
       Player.hasOne(models.GameResult, { foreignKey: "WinnerId", as: "winner" });
     }
   }
   Player.init(
     {
-      username: DataTypes.STRING,
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Username is requIred",
+          },
+          notNull: {
+            msg: "Username is requIred",
+          },
+        },
+      },
     },
     {
       sequelize,
