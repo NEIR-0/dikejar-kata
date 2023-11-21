@@ -51,6 +51,7 @@ List of available endpoints:
 - `POST /games`
 - `GET /games/:gameId`
 - `POST /games/:gameId`
+- `GET /games/:gameId/start`
 - `GET /games/:gameId/result`
 
 
@@ -66,7 +67,7 @@ Description:
 
 parameters:
 
-- gameSessionId: integer
+- gameId: integer
 
 _Response (200 - OK)_
 
@@ -156,7 +157,6 @@ _Response (401 - Unauthorized)_
 ```json
 {
   "message": "Not registered",
-  "gameSessionId": "number"
 }
 ```
 
@@ -205,7 +205,6 @@ _Response (401 - Unauthorized)_
 ```json
 {
   "message": "Not registered",
-  "gameSessionId": "number"
 }
 ```
 
@@ -252,7 +251,6 @@ _Response (401 - Unauthorized)_
 ```json
 {
   "message": "Not registered",
-  "gameSessionId": "number"
 }
 ```
 
@@ -307,7 +305,6 @@ _Response (401 - Unauthorized)_
 ```json
 {
   "message": "Not registered",
-  "gameSessionId": "number"
 }
 ```
 
@@ -365,7 +362,6 @@ _Response (401 - Unauthorized)_
 ```json
 {
   "message": "Not registered",
-  "gameSessionId": "number"
 }
 ```
 
