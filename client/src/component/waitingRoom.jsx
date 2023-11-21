@@ -1,24 +1,15 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import BackButton from "../component/backButton";
 import TableRoom from "../component/tableRoom";
-import { io } from "socket.io-client";
 import socket from "../socket";
-function WaitingRoom() {
-  const { gameId } = useParams();
-  const [data, setData] = useState("");
-  const [player, setPlayer] = useState("");
+import { useParams } from "react-router-dom";
 
-  useEffect(() => {
-    socket.emit("CLIENT_JOIN", { gameId, access_token: localStorage.access_token });
-    socket.on("SERVER_JOINED", (data) => {
-      // console.log(data.data);
-      setPlayer(data.data.players);
-      setData(data.data);
-    });
-  }, []);
-  console.log(data.isGameMaster);
+function WaitingRoom({ data, player }) {
+  const { gameId } = useParams();
+
+  function startHandler() {
+    socket.emit("CLIENT_START", { gameId, access_token: localStorage.access_token });
+  }
+
   return (
     <>
       <section className="w-full h-fit bg-purple-500 flex p-10 items-center flex-col relative">
@@ -34,7 +25,7 @@ function WaitingRoom() {
         {/* start */}
         {data.isGameMaster === true ? (
           <div className="w-[70%] my-4">
-            <button className="px-16 py-3 bg-blue-600">Start</button>
+            <button onClick={startHandler} className="px-16 py-3 bg-blue-600">Start</button>
           </div>
         ) : (
           ""

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import TimerBar from "../component/timerBar";
 import UserCirlces from "../component/userCirlces";
 
-const DisplayGame = () => {
+const UjiCoba = () => {
   useEffect(() => {
     document.querySelectorAll(".ciclegraph").forEach((ciclegraph) => {
       let circles = ciclegraph.querySelectorAll(".circle");
@@ -32,4 +32,4 @@ const DisplayGame = () => {
   );
 };
 
-export default DisplayGame;
+export default UjiCoba;
