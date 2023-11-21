@@ -18,7 +18,7 @@ function WaitingRoom() {
       setData(data.data);
     });
   }, []);
-  console.log(data);
+  console.log(data.isGameMaster);
   return (
     <>
       <section className="w-full h-fit bg-purple-500 flex p-10 items-center flex-col relative">
@@ -32,7 +32,7 @@ function WaitingRoom() {
         </p>
 
         {/* start */}
-        {data.IsGameMaster === true ? (
+        {data.isGameMaster === true ? (
           <div className="w-[70%] my-4">
             <button className="px-16 py-3 bg-blue-600">Start</button>
           </div>
