@@ -7,9 +7,12 @@ body {
 }
 
 .bgImg {
-  background-image: url("../public/bg-register.jpg");
+  background-image: url("../public/970707.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+  overflow: auto; 
+  height: 100vh; 
 }
 
 /* circles */
