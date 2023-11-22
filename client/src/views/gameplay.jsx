@@ -69,7 +69,7 @@ function GamePlay({ data, player }) {
               <form onSubmit={submitAnswer} className="w-full h-full flex justify-center items-center flex-col">
                 <img className="w-28" src={questionImg} />
                 <h1 className="">Tuliskan jawaban mu!</h1>
-                <input onChange={inputAnswer} name="answer" type="text" className="w-[40%] h-7 rounded-md px-2 my-4 border border-black" />
+                <input onChange={inputAnswer} name="answer" type="text" className="w-[60%] h-7 rounded-md px-2 my-4 border border-black" />
                 <button className="py-2 px-5 bg-sky-400 text-white rounded-md">submit</button>
               </form>
             </div>
