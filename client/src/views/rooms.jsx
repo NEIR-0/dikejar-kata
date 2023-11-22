@@ -10,6 +10,7 @@ function RoomPlayer() {
     status: "",
   });
   const [player, setPlayer] = useState("");
+  const [playerGames, setPlayerGames] = useState("");
   const [status, setStatus] = useState("waiting");
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function RoomPlayer() {
 
     socket.on("SERVER_STARTED", (data) => {
       setData(data.data);
-      setPlayer(data.data.playersOrder);
+      setPlayerGames(data.data.playersOrder);
       // status
       setStatus("playing");
       socket.emit("CLIENT_READY", { gameId });
@@ -44,7 +45,7 @@ function RoomPlayer() {
   return (
     <>
       {status === "waiting" && <WaitingRoom data={data} player={player} />}
-      {status === "playing" && <GamePlay data={data} player={player} />}
+      {status === "playing" && <GamePlay data={data} playerGames={playerGames} />}
     </>
   );
 }

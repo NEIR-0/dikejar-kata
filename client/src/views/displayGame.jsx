@@ -19,23 +19,26 @@ const DisplayGame = ({ question, turn, player }) => {
   return (
     <>
       <div className="w-full h-full flex justify-center items-center">
-        <div className="ciclegraph bg-yellow-400 relative w-[500px] h-[500px]">
-          {player &&
+        <div className="ciclegraph relative w-[500px] h-[500px]">
+          <UserCirlces turn={turn} />
+
+          {/* {player &&
             player.map((el) => {
               return <UserCirlces key={el.id} data={el} turn={turn} />;
-            })}
+            })} */}
         </div>
         <div
           className={
-            turn === true
-              ? "absolute top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col bg-white"
-              : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col bg-white"
+            turn === true ? "absolute top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col" : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col"
           }
         >
           <TimerBar />
           {/* bomb */}
           <i class="fa-solid fa-bomb text-[70px] my-5"></i>
-          <h1>word: {question}</h1>
+          {/* <h1>word: {question}</h1> */}
+          <h1 className="text-[20px]">
+            word: <span className="font-bold">ASI</span>
+          </h1>
         </div>
       </div>
     </>
