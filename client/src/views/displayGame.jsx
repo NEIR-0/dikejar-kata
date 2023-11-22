@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import TimerBar from "../component/timerBar";
 import UserCirlces from "../component/userCirlces";
 
-const DisplayGame = ({ turn, data }) => {
-  let { players, selectedUserId, question } = data;
+const DisplayGame = ({ data }) => {
+  let { players, selectedUserId, question, startTime, duration } = data;
 
-  const isSelected = selectedUserId == localStorage.userId;
 
   useEffect(() => {
     document.querySelectorAll(".ciclegraph").forEach((ciclegraph) => {
@@ -18,27 +17,26 @@ const DisplayGame = ({ turn, data }) => {
         circle.style.transform = `rotate(${angle}deg) translate(${ciclegraph.clientWidth / 2}px) rotate(-${angle}deg)`;
       }
     });
-  }, []);
-
-  // players = players.slice(0, 2)
+  }, [data]);
 
   return (
     <>
       <div className="w-full h-full relative flex justify-center items-center">
         <div className="relative w-[500px] h-[500px]">
-          <div className="ciclegraph">
-            {/* dummy doang */}
-            {players.map((player) => {
+          <div className="ciclegraph w-[500px] h-[500px]">
+            {players?.map((player) => {
               return <UserCirlces player={player} selectedUserId={selectedUserId} />;
             })}
           </div>
 
-          <div className="absolute top-1/2 left-1/2 transform ">
-            <TimerBar />
-            <i className="fa-solid fa-bomb text-[70px] my-5" />
-            <h1 className="text-[20px]">
-              word: <span className="font-bold">{question}</span>
-            </h1>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <TimerBar startTime={startTime} duration={duration} />
+            <div className="text-center">
+              <i className="fa-solid fa-bomb text-[70px] my-5" />
+              <h1 className="text-[20px]">
+                word: <span className="font-bold">{question}</span>
+              </h1>
+            </div>
           </div>
         </div>
       </div>

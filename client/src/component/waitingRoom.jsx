@@ -24,7 +24,7 @@ function WaitingRoom({ data, player = [] }) {
           </p>
 
           {/* start */} 
-          {data.isGameMaster === true ? (
+          {data.GameMasterId == localStorage.userId ? (
             <div className="w-[40%] my-4">
               <button onClick={startHandler} className="px-16 py-3 bg-purple-500 text-white rounded-md">
                 Start

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BackButton from "../component/backButton";
+import Swal2 from "sweetalert2";
+
 function CreateRoom() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -26,9 +28,15 @@ function CreateRoom() {
           Authorization: "Bearer " + localStorage.access_token,
         },
       });
-      // console.log(data);
+
       navigate("/");
     } catch (error) {
+      Swal2.fire({
+        title: "Error",
+        text: "Something has gone wrong",
+        icon: "error"
+      });
+
       console.log(error);
     }
   };

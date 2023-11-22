@@ -7,7 +7,7 @@ import Register from "./pages/Register.jsx";
 import Home from "./pages/Home.jsx";
 import CreateRoom from "./pages/CreateRoom.jsx";
 import Game from "./pages/Game.jsx";
-import Winner from "./views/winner.jsx";
+import Winner from "./pages/winner.jsx";
 import GamePlay from "./views/gameplay.jsx";
 
 const auth = () => {
@@ -42,15 +42,9 @@ const router = createBrowserRouter([
         loader: auth,
       },
 
-      // dummy
       {
-        path: "Winner",
+        path: "/games/:gameId/result",
         element: <Winner />,
-        loader: auth,
-      },
-      {
-        path: "gamestart",
-        element: <GamePlay />,
         loader: auth,
       },
     ],
