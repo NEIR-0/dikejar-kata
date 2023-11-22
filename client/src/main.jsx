@@ -46,11 +46,18 @@ const router = createBrowserRouter([
         element: <GamePlay />,
         loader: auth,
       },
-      // {
-      //   path: "Winner",
-      //   element: <Winner />,
-      //   loader: auth,
-      // },
+
+      // dummy
+      {
+        path: "Winner",
+        element: <Winner />,
+        loader: auth,
+      },
+      {
+        path: "gamestart",
+        element: <GamePlay />,
+        loader: auth,
+      },
     ],
   },
 ]);

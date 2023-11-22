@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -6,9 +5,11 @@ import socket from "../socket";
 import DisplayGame from "../views/displayGame";
 import Winner from "./winner";
 
+import questionImg from "../../public/question.png";
+
 function GamePlay({ data, player }) {
   const { gameId } = useParams();
-  const [turn, setTurn] = useState(true); // defaultnya "false"
+  const [turn, setTurn] = useState(false); // defaultnya "false"
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState({
     answer: "",
@@ -41,6 +42,7 @@ function GamePlay({ data, player }) {
       [name]: value,
     });
   };
+  console.log(answer);
 
   const submitAnswer = (e) => {
     setTurn(false);
@@ -63,15 +65,12 @@ function GamePlay({ data, player }) {
 
           {/* turn */}
           {turn === true ? (
-            <div className="w-[30%] h-screen bg-green-600 p-5">
+            <div className="w-[30%] h-screen bg-yellow-200 p-5">
               <form onSubmit={submitAnswer} className="w-full h-full flex justify-center items-center flex-col">
-                <div className="text-left mb-32">
-                  <h1>title:{data && data.title}</h1>
-                  <h1>language:{data && data.language}</h1>
-                </div>
-                <h1>Tuliskan jawaban mu!</h1>
-                <input onChange={inputAnswer} name="answer" type="text" className="w-[40%] h-10 px-2 my-4" />
-                <button className="py-2 px-5 bg-blue-500">submit</button>
+                <img className="w-28" src={questionImg} />
+                <h1 className="">Tuliskan jawaban mu!</h1>
+                <input onChange={inputAnswer} name="answer" type="text" className="w-[40%] h-7 rounded-md px-2 my-4 border border-black" />
+                <button className="py-2 px-5 bg-sky-400 text-white rounded-md">submit</button>
               </form>
             </div>
           ) : (

@@ -33,6 +33,13 @@ body {
   height: 100vh;
 }
 
+/* questionImg */
+.questionImg {
+  background-image: url("../public//question.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 /* circles */
 .ciclegraph {
   margin: calc(100px / 2 + 0px);
