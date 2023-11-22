@@ -26,15 +26,12 @@ function getRandomWord(lang) {
   }
 }
 
-while (true) {
-  const random = Math.round(Math.random());
+function verifyWord(lang, word) {
+  let wordList;
+  if (lang === "en") wordList = englishWords;
+  if (lang === "id") wordList = indonesiaWords;
 
-  let sliced;
-  if (random) {
-    sliced = getRandomWord("en");
-  } else {
-    sliced = getRandomWord("id");
-  }
-
-  console.log(sliced);
+  return wordList.includes(word);
 }
+
+module.exports = { getRandomWord, verifyWord };

@@ -90,13 +90,15 @@ module.exports = class GameController {
         include: {
           model: Player,
           as: "players",
-          attributes: ["username"],
+          attributes: ["username", "id"],
         },
       });
 
       let isGameMaster = data.GameMasterId === userId;
 
       data = data.toJSON();
+
+      data.player_ids = data.players.map(({ id }) => id);
       data.players = data.players.map(({ username }) => username);
       data.isGameMaster = isGameMaster;
 
@@ -129,7 +131,7 @@ module.exports = class GameController {
       }
 
       const playerIndex = selectedGame.players.findIndex((player) => {
-        return player.GamePlayer.PlayerId == userId
+        return player.GamePlayer.PlayerId == userId;
       });
 
       if (playerIndex === -1) {

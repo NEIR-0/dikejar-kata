@@ -90,3 +90,14 @@ SERVER_WRONG
 SERVER_TIMEOUT
 
 - no data passed
+
+SERVER_GAMEOVER
+- data
+```json
+{
+  "winner": {
+    "username": "string",
+    "userId": "integer"
+  }
+}
+```

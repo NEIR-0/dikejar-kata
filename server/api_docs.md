@@ -103,7 +103,8 @@ Description:
 
 ```json
 {
-  "username": "string"
+  "username": "string",
+  "user_id": "integer"
 }
 ```
 
@@ -229,6 +230,7 @@ _Response (200 - OK)_
   "data": {
     "title": "string",
     "players": ["string", ...],
+    "player_ids": ["integer", ...],
     "language": "id | en",
     "status": "playing | waiting | ended",
     "GameMasterId": "integer",
