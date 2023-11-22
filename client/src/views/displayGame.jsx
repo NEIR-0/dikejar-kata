@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import TimerBar from "../component/timerBar";
 import UserCirlces from "../component/userCirlces";
 
-const UjiCoba = () => {
+const DisplayGame = ({ turn }) => {
   useEffect(() => {
     document.querySelectorAll(".ciclegraph").forEach((ciclegraph) => {
       let circles = ciclegraph.querySelectorAll(".circle");
@@ -18,18 +18,24 @@ const UjiCoba = () => {
 
   return (
     <>
-      <section className="w-full h-screen bg-red-500 flex justify-center items-center relative">
-        <div className="ciclegraph bg-yellow-400">
-          <UserCirlces />
+      <div className="w-full h-full flex justify-center items-center">
+        <div className="ciclegraph bg-yellow-400 relative w-[500px] h-[500px]">
+          <UserCirlces turn={turn} />
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div
+          className={
+            turn === true
+              ? "absolute top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col bg-white"
+              : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col bg-white"
+          }
+        >
           <TimerBar />
           bom
           <h1>soal</h1>
         </div>
-      </section>
+      </div>
     </>
   );
 };
 
-export default UjiCoba;
+export default DisplayGame;
