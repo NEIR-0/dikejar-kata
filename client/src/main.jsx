@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         loader: auth,
       },
       {
-        path: "gameStart",
+        path: "/games/:gameId/start",
         element: <GamePlay />,
         loader: auth,
       },
