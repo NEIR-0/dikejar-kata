@@ -23,6 +23,8 @@ function Register() {
       const { data } = await axios.post("http://localhost:3000/register", username);
       // console.log(data.access_token);
       localStorage.access_token = data.access_token;
+      localStorage.access_token = data.userId; // userId
+
       navigate("/");
     } catch (error) {
       console.log(error);
