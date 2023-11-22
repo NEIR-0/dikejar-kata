@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import TimerBar from "../component/timerBar";
 import UserCirlces from "../component/userCirlces";
 
-const DisplayGame = ({ turn }) => {
+const DisplayGame = ({ question, turn, player }) => {
   useEffect(() => {
     document.querySelectorAll(".ciclegraph").forEach((ciclegraph) => {
       let circles = ciclegraph.querySelectorAll(".circle");
@@ -20,7 +20,10 @@ const DisplayGame = ({ turn }) => {
     <>
       <div className="w-full h-full flex justify-center items-center">
         <div className="ciclegraph bg-yellow-400 relative w-[500px] h-[500px]">
-          <UserCirlces turn={turn} />
+          {player &&
+            player.map((el) => {
+              return <UserCirlces key={el.id} data={el} turn={turn} />;
+            })}
         </div>
         <div
           className={
@@ -30,8 +33,9 @@ const DisplayGame = ({ turn }) => {
           }
         >
           <TimerBar />
-          bom
-          <h1>soal</h1>
+          {/* bomb */}
+          <i class="fa-solid fa-bomb text-[70px] my-5"></i>
+          <h1>word: {question}</h1>
         </div>
       </div>
     </>
