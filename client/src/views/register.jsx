@@ -31,12 +31,21 @@ function Register() {
   return (
     <>
       <section className="bgImg w-full h-screen flex justify-center items-center bg-[#ecf0f1]">
-        <div className="text-center p-20 rounded-md shadow-md w-[90%] md:w-fit backdrop-blur-md">
-          <h1 className="text-[25px] mb-10 text-white font-bold md:text-[40px]">Lets have fun!</h1>
-          <form onSubmit={submitUser} className=" w-[150px] h-fit m-auto">
-            <input onChange={inputUser} className="w-full h-[35px] mb-5 px-5 rounded-md" type="text" name="username" placeholder="username..." />
-            <button className="w-[100px] py-2 bg-orange-400 rounded-md text-white">submit</button>
-          </form>
+        <div className="flex justify-center items-center flex-col">
+          <div className="w-[40%]">
+            <img src="../../public/COMIC-removebg.png" alt="" />
+          </div>
+          <div className="text-center p-20 rounded-md shadow-md w-[90%] md:w-fit ">
+            <h1 className="text-[25px] mb-10 text-[#a7a5a5] font-sans italic font-extrabold md:text-[80px]">Fill Your Username!</h1>
+            <form onSubmit={submitUser} className=" w-[500px] h-fit m-auto">
+              <div>
+                <input onChange={inputUser} className="border-4 w-full h-[60px] mb-5 px-5 rounded-md" type="text" name="username" placeholder="username..." />
+              </div>
+              <div>
+                <button className="w-[100px] py-2 bg-orange-400 rounded-md text-white">submit</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </>
