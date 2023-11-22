@@ -1,14 +1,12 @@
 import BackButton from "../component/backButton";
 import TableRoom from "../component/tableRoom";
 import socket from "../socket";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function WaitingRoom({ data, player }) {
   const { gameId } = useParams();
-  const navigate = useNavigate();
   function startHandler() {
     socket.emit("CLIENT_START", { gameId, access_token: localStorage.access_token });
-    navigate("/gameStart");
   }
 
   return (
@@ -26,9 +24,9 @@ function WaitingRoom({ data, player }) {
         {/* start */}
         {data.isGameMaster === true ? (
           <div className="w-[70%] my-4">
-            <button onClick={startHandler} className="px-16 py-3 bg-blue-600">
+            <Link to={`/games/${gameId}/start`} onClick={startHandler} className="px-16 py-3 bg-blue-600">
               Start
-            </button>
+            </Link>
           </div>
         ) : (
           ""

@@ -1,9 +1,11 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import socket from "../socket";
 import DisplayGame from "../views/displayGame";
 import Winner from "./winner";
 
 function GamePlay({ data, player }) {
+  const { gameId } = useParams();
   const [turn, setTurn] = useState(true); // defaultnya "false"
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState({
@@ -20,7 +22,7 @@ function GamePlay({ data, player }) {
       setStatus("playing");
       setQuestion(data.question);
     });
-    socket.emit("CLIENT_ANSWER", { gameId: ?, userId: localStorage.userId, answer: answer }); // gameId dapat dari mana?
+    socket.emit("CLIENT_ANSWER", { gameId: gameId, userId: localStorage.userId, answer: answer }); // gameId dapat dari mana?
 
     // gameover
     socket.on("SERVER_GAMEOVER", (data) => {
@@ -76,7 +78,7 @@ function GamePlay({ data, player }) {
         </section>
       )}
 
-      {status === "waiting" && <Winner winner={winner}  />}
+      {status === "waiting" && <Winner winner={winner} />}
     </>
   );
 }
