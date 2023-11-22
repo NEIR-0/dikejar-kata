@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Navbar from "../component/navbar";
 
-function RoomList() {
+function Home() {
   const navigate = useNavigate();
   const [room, setRoom] = useState([]);
 
@@ -21,7 +21,6 @@ function RoomList() {
           Authorization: "Bearer " + localStorage.access_token,
         },
       });
-      // console.log(data.games);
       setRoom(data.games);
     } catch (error) {
       console.log(error);
@@ -62,4 +61,4 @@ function RoomList() {
   );
 }
 
-export default RoomList;
+export default Home;

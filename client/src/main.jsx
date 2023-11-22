@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
-import Register from "./views/register.jsx";
-import RoomList from "./views/home.jsx";
-import CreateRoom from "./views/createRoom.jsx";
-import RoomPlayer from "./views/rooms.jsx";
+import Register from "./pages/Register.jsx";
+import Home from "./pages/Home.jsx";
+import CreateRoom from "./pages/CreateRoom.jsx";
+import Game from "./pages/Game.jsx";
 import Winner from "./views/winner.jsx";
 import GamePlay from "./views/gameplay.jsx";
 
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/",
-        element: <RoomList />,
+        element: <Home />,
         loader: auth,
       },
       {
@@ -38,12 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "games/:gameId",
-        element: <RoomPlayer />,
-        loader: auth,
-      },
-      {
-        path: "/games/:gameId/start",
-        element: <GamePlay />,
+        element: <Game />,
         loader: auth,
       },
 

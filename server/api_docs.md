@@ -46,7 +46,6 @@ _GameResult_
 
 List of available endpoints:
 
-- `GET /checkSession/:gameId`
 - `POST /register`
 - `GET /games`
 - `POST /games`
@@ -59,40 +58,6 @@ List of available endpoints:
 
 # Routes
 
-## 0. GET /checkSession/:gameId
-
-Description:
-
-- Checks if selected game is available
-
-parameters:
-
-- gameId: integer
-
-_Response (200 - OK)_
-
-```json
-{
-  "message": "OK"
-}
-```
-
-_Response (404 - Not Found)_
-
-```json
-{
-  "message": "Game already started / ended"
-}
-```
-
-_Response (404 - Not Found)_
-
-```json
-{
-  "message": "Game not found"
-}
-```
-
 ## 1. POST /register
 
 Description:
@@ -104,7 +69,7 @@ Description:
 ```json
 {
   "username": "string",
-  "user_id": "integer"
+  "userId": "integer"
 }
 ```
 
@@ -230,7 +195,6 @@ _Response (200 - OK)_
   "data": {
     "title": "string",
     "players": ["string", ...],
-    "player_ids": ["integer", ...],
     "language": "id | en",
     "status": "playing | waiting | ended",
     "GameMasterId": "integer",

@@ -15,13 +15,11 @@ function Register() {
       [name]: value,
     });
   };
-  // console.log(username);
 
   const submitUser = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post("http://localhost:3000/register", username);
-      // console.log(data.access_token);
       localStorage.access_token = data.access_token;
       localStorage.userId = data.userId; // userId
 

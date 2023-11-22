@@ -9,9 +9,9 @@ function TableRoom({ data, id }) {
       </tr> */}
       <tr className="bg-white border-b">
         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-          {id && id}
+          {id}
         </th>
-        <td className="px-6 py-4">{data && data}</td>
+        <td className="px-6 py-4">{data && data.username}</td>
         
       </tr>
     </>

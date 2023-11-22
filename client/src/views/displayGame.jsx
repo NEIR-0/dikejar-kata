@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import TimerBar from "../component/timerBar";
 import UserCirlces from "../component/userCirlces";
 
-const DisplayGame = ({ question, turn, player }) => {
+const DisplayGame = ({ turn, data }) => {
+  let { players, selectedUserId, question } = data;
+
+  const isSelected = selectedUserId == localStorage.userId;
+
   useEffect(() => {
     document.querySelectorAll(".ciclegraph").forEach((ciclegraph) => {
       let circles = ciclegraph.querySelectorAll(".circle");
@@ -16,34 +20,26 @@ const DisplayGame = ({ question, turn, player }) => {
     });
   }, []);
 
+  // players = players.slice(0, 2)
+
   return (
     <>
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="ciclegraph relative w-[500px] h-[500px]">
-          {/* dummy doang */}
-          <UserCirlces turn={turn} />
-          <UserCirlces turn={turn} />
-          <UserCirlces turn={turn} />
+      <div className="w-full h-full relative flex justify-center items-center">
+        <div className="relative w-[500px] h-[500px]">
+          <div className="ciclegraph">
+            {/* dummy doang */}
+            {players.map((player) => {
+              return <UserCirlces player={player} selectedUserId={selectedUserId} />;
+            })}
+          </div>
 
-          {/* {player &&
-            player.map((el) => {
-              return <UserCirlces key={el.id} data={el} turn={turn} />;
-            })} */}
-        </div>
-        <div
-          className={
-            turn === true
-              ? "absolute top-1/2 left-[38.5%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col"
-              : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col"
-          }
-        >
-          <TimerBar />
-          {/* bomb */}
-          <i className="fa-solid fa-bomb text-[70px] my-5" />
-          {/* <h1>word: {question}</h1> */}
-          <h1 className="text-[20px]">
-            word: <span className="font-bold">ASI</span>
-          </h1>
+          <div className="absolute top-1/2 left-1/2 transform ">
+            <TimerBar />
+            <i className="fa-solid fa-bomb text-[70px] my-5" />
+            <h1 className="text-[20px]">
+              word: <span className="font-bold">{question}</span>
+            </h1>
+          </div>
         </div>
       </div>
     </>

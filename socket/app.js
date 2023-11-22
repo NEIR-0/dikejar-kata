@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
 const axios = require("axios");
-// const { getRandomWord, verifyWord } = require("./helper/questions");
+const { getRandomWord, verifyWord } = require("./helper/questions");
 
 const io = socketIo(server, {
   cors: {
@@ -26,14 +26,16 @@ class Room {
     return false;
   }
 
-  static createRoom(roomId, player_ids) {
-    this.rooms.push(new Room(roomId, player_ids));
+  static createRoom(roomId, language, players) {
+    this.rooms.push(new Room(roomId, language, players));
   }
 
-  constructor(roomId, player_ids, language) {
+  constructor(roomId, language, players) {
     this.roomId = roomId;
     this.language = language;
-    this.player_ids = player_ids;
+
+    this.players = players;
+    this.players.forEach((player) => (player.isDefeated = false));
 
     // waiting stage
     this.isGameStarted = false;
@@ -51,16 +53,17 @@ class Room {
   playerReady() {
     this.playerReadyCount++;
 
-    if (this.playerReadyCount >= this.player_ids.length / 2) {
+    if (this.playerReadyCount >= this.players.length / 2) {
       this.startGame();
     }
+
+    // todo: comment this
+    this.startGame();
   }
 
   startGame() {
-    console.log("started");
-
     if (!this.isGameStarted) {
-      const randomIndex = Math.floor(Math.random() * this.player_ids.length);
+      const randomIndex = Math.floor(Math.random() * this.players.length);
 
       this.currentIndex = randomIndex;
       this.question();
@@ -68,27 +71,35 @@ class Room {
   }
 
   question() {
-    // const question = getRandomWord(this.language);
-    const question = "abc";
+    const question = getRandomWord(this.language);
     this.currentQuestion = question;
 
-    const selectedUserId = this.player_ids[this.currentIndex];
+    const selectedUserId = this.players[this.currentIndex].id;
     this.currentUserId = selectedUserId;
+    this.currentDuration = 5000;
 
-    io.to(this.roomId).emit("SERVER_QUESTION", { question, selectedUserId });
+    io.to(this.roomId).emit("SERVER_QUESTION", {
+      question,
+      selectedUserId,
+      selectedIndex: this.currentIndex,
+      players: this.players,
+      startTime: Date.now(),
+      duration: this.currentDuration,
+    });
 
-    let nextIndex = this.currentIndex++;
-    if (nextIndex >= this.player_ids.length) nextIndex = 0;
-    this.currentIndex = nextIndex;
-
-    this.timeout = setInterval(() => {
+    this.timeout = setTimeout(() => {
       console.log("timeout");
       this.timesUp();
-    }, 5000);
+    }, this.currentDuration);
   }
 
   timesUp() {
+    // this.players[this.currentIndex].isDefeated = true;
     io.to(this.roomId).emit("SERVER_TIMEOUT");
+
+    this.players[this.currentIndex].isDefeated = true;
+
+    this.nextTurn();
   }
 
   answer(userId, answer) {
@@ -96,8 +107,25 @@ class Room {
       if (verifyWord(answer)) {
         io.to(this.roomId).emit("SERVER_CORRECT", { userId, answer });
         clearTimeout(this.timeout);
+
+        this.nextTurn();
       }
     }
+  }
+
+  nextTurn() {
+    let nextIndex = this.currentIndex + 1;
+    if (nextIndex >= this.players.length) nextIndex = 0;
+
+    while (this.players[nextIndex]?.isDefeated) {
+      nextIndex++;
+    }
+
+    this.currentIndex = nextIndex;
+    console.log(nextIndex, "<<<<");
+
+    // todo check how many players left
+    this.question();
   }
 }
 
@@ -114,13 +142,13 @@ io.on("connection", (socket) => {
         },
       });
 
-      const { player_ids, language } = data.data;
+      const { language, players } = data.data;
 
       const selectedRoom = Room.getRoom(gameId);
       if (selectedRoom) {
-        selectedRoom.player_ids = player_ids;
+        selectedRoom.players = players;
       } else {
-        Room.createRoom(gameId, player_ids, language);
+        Room.createRoom(gameId, language, players);
       }
 
       socket.join(gameId);
@@ -147,7 +175,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("CLIENT_READY", (params) => {
-    console.log("CLIENT_READY");
     const { gameId } = params;
 
     const selectedRoom = Room.getRoom(gameId);

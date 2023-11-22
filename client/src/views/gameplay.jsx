@@ -7,32 +7,50 @@ import Winner from "./winner";
 
 import questionImg from "../../public/question.png";
 
-function GamePlay({ data, player }) {
+function GamePlay() {
   const { gameId } = useParams();
+
+  const [isWaiting, setIsWaiting] = useState(true);
+
   const [turn, setTurn] = useState(false); // defaultnya "false"
-  const [question, setQuestion] = useState("");
+
+  const [data, setData] = useState({});
   const [answer, setAnswer] = useState({
     answer: "",
   });
-  const [status, setStatus] = useState("playing"); // playing | waiting | ended
-  const [winner, setWinner] = useState("");
-  useEffect(() => {
-    socket.emit("CLIENT_READY");
-    socket.on("SERVER_QUESTION", (data) => {
-      if (selectedUserId === localStorage.userId) {
-        setTurn(true);
-      }
-      setStatus("playing");
-      setQuestion(data.question);
-    });
-    socket.emit("CLIENT_ANSWER", { gameId: gameId, userId: localStorage.userId, answer: answer }); // gameId dapat dari mana?
 
-    // gameover
-    socket.on("SERVER_GAMEOVER", (data) => {
-      setWinner(data.winner);
-      setStatus("ended");
-      console.log("gameover");
+  // const [winner, setWinner] = useState("");
+
+  useEffect(() => {
+    socket.on("SERVER_QUESTION", (data) => {
+      setIsWaiting(false);
+
+      if (data.selectedUserId == localStorage.userId) {
+        setTurn(true);
+      } else {
+        setTurn(false);
+      }
+
+      console.log(data, "<<<<");
+
+      setData(data);
     });
+
+    socket.on("SERVER_CORRECT", () => {
+      setIsWaiting(false);
+    });
+
+    socket.on("SERVER_WRONG", () => {
+      setIsWaiting(false);
+    });
+
+    socket.on("SERVER_TIMEOUT", () => {
+      setIsWaiting(false);
+    });
+
+    return () => {
+      socket.off("SERVER_QUESTION");
+    };
   }, []);
 
   const inputAnswer = (e) => {
@@ -42,25 +60,25 @@ function GamePlay({ data, player }) {
       [name]: value,
     });
   };
-  console.log(answer);
 
   const submitAnswer = (e) => {
-    setTurn(false);
+    socket.emit("CLIENT_ANSWER", { gameId: gameId, userId: localStorage.userId, answer: answer }); // gameId dapat dari mana?
   };
+
   return (
     <>
-      {status === "waiting" && (
+      {isWaiting && (
         <section className="h-screen w-full flex justify-center items-center">
           <h1 className="text-[100px]">Waiting another player...</h1>
         </section>
       )}
 
-      {status === "playing" && (
+      {!isWaiting && (
         <section className="w-full h-screen relative flex">
           {/* layar */}
           <div className={turn === true ? "w-[70%] h-screen" : "w-full h-screen p-5 flex justify-center items-center"}>
             {/* game-play */}
-            <DisplayGame question={question} turn={turn} player={player} />
+            <DisplayGame data={data} />
           </div>
 
           {/* turn */}
@@ -79,7 +97,7 @@ function GamePlay({ data, player }) {
         </section>
       )}
 
-      {status === "ended" && <Winner winner={winner} />}
+      {/* {status === "ended" && <Winner winner={winner} />} */}
     </>
   );
 }

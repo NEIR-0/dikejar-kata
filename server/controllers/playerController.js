@@ -13,7 +13,7 @@ module.exports = class PlayerController {
 
       const access_token = createToken({ id: player.id });
 
-      return res.status(200).json({ access_token });
+      return res.status(200).json({ access_token, userId: player.id });
     } catch (error) {
       return next(error);
     }
