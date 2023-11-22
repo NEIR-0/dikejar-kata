@@ -6,7 +6,6 @@ import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom"
 import Register from "./views/register.jsx";
 import RoomList from "./views/home.jsx";
 import CreateRoom from "./views/createRoom.jsx";
-import UjiCoba from "./views/ujicoba.jsx";
 import RoomPlayer from "./views/rooms.jsx";
 import Winner from "./views/winner.jsx";
 import GamePlay from "./views/gameplay.jsx";
@@ -45,7 +44,6 @@ const router = createBrowserRouter([
       {
         path: "gameStart",
         element: <GamePlay />,
-        // element: <UjiCoba />,
         loader: auth,
       },
       // {
