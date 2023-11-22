@@ -23,7 +23,7 @@ function WaitingRoom({ data, player }) {
           </p>
 
           {/* start */}
-          {data.isGameMaster === false ? (
+          {data.isGameMaster === true ? (
             <div className="w-[40%] my-4">
               <Link to={`/games/${gameId}/start`} onClick={startHandler} className="px-16 py-3 bg-purple-500 text-white rounded-md">
                 Start
@@ -49,6 +49,7 @@ function WaitingRoom({ data, player }) {
                 </tr>
               </thead>
               <tbody>
+                {/* <TableRoom />
                 <TableRoom />
                 <TableRoom />
                 <TableRoom />
@@ -59,11 +60,18 @@ function WaitingRoom({ data, player }) {
                 <TableRoom />
                 <TableRoom />
                 <TableRoom />
+                <TableRoom />
+                <TableRoom />
+                <TableRoom />
+                <TableRoom />
+                <TableRoom />
+                <TableRoom />
+                <TableRoom /> */}
 
-                {/* {player &&
+                {player &&
                 player.map((el, index) => {
                   return <TableRoom key={el.id} data={el} id={index + 1} />;
-                })} */}
+                })}
               </tbody>
             </table>
           </div>

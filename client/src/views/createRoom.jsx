@@ -36,10 +36,10 @@ function CreateRoom() {
   return (
     <>
       {/* form create room */}
-      <section className="w-full h-screen bg-red-400 z-20 fixed left-0 top-0 flex justify-center items-center flex-col">
+      <section className="bgCreateRoom w-full h-screen bg-red-400 z-20 fixed left-0 top-0 flex justify-center items-center flex-col">
         <BackButton />
         <div className="bg-yellow-400 p-10 rounded-md">
-          <h1 className="text-[50px] text-center mb-5 text-white font-bold">Create rooms</h1>
+          <h1 className="text-[50px] text-center mb-5 text-red-600 font-bold">Create rooms</h1>
           <form onSubmit={submitUser} className="bg-blue-500 p-10">
             <ul>
               <li className="flex flex-col">
