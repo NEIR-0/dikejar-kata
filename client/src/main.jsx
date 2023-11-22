@@ -44,8 +44,8 @@ const router = createBrowserRouter([
       },
       {
         path: "gameStart",
-        // element: <GamePlay />,
-        element: <UjiCoba />,
+        element: <GamePlay />,
+        // element: <UjiCoba />,
         loader: auth,
       },
       // {

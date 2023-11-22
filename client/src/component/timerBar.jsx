@@ -29,9 +29,8 @@ function TimerBar() {
 
   return (
     <>
-      <div className="timer-container">
+      <div className="timer-container w-[300px]">
         <div className="timer" style={timerStyle}></div>
-        <p>Waktu Tersisa: {seconds} detik</p>
       </div>
     </>
   );
