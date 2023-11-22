@@ -32,7 +32,9 @@ const DisplayGame = ({ question, turn, player }) => {
         </div>
         <div
           className={
-            turn === true ? "absolute top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col" : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col"
+            turn === true
+              ? "absolute top-1/2 left-[38.5%] -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col"
+              : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col"
           }
         >
           <TimerBar />

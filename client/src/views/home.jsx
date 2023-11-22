@@ -3,7 +3,8 @@ import { useState } from "react";
 import CardRoom from "../component/roomList";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import LogoutBtn from "../component/logout";
+
+import Navbar from "../component/navbar";
 
 function RoomList() {
   const navigate = useNavigate();
@@ -26,7 +27,6 @@ function RoomList() {
       console.log(error);
     }
   };
-
   const logout = () => {
     localStorage.clear();
     navigate("/register");
@@ -34,15 +34,12 @@ function RoomList() {
 
   return (
     <>
-      <section className="bgImg w-full h-screen flex-cols justify-center items-center">
-        <section className="w-full h-14 relative flex items-center p-2">
-          <LogoutBtn logout={logout} />
-        </section>
-
-        {/* searc */}
+      <Navbar logout={logout} />
+      <section className="bgImg w-full h-screen flex-cols justify-center items-center pt-16">
+        {/* search */}
         <section className="w-full h-fit mt-10 flex justify-center items-center relative">
           <form className="flex justify-center items-center">
-            <input className="w-[400px] h-10 rounded-s-md" type="text" />
+            <input className="w-[400px] h-10 outline-none px-5 rounded-s-md" type="text" />
             <button className="py-2 px-4 bg-blue-600 rounded-e-md rounded-sm">
               <i className="fa-solid fa-magnifying-glass " />
             </button>
