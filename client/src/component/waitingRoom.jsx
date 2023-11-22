@@ -23,7 +23,7 @@ function WaitingRoom({ data, player }) {
           </p>
 
           {/* start */}
-          {data.isGameMaster === false ? (
+          {data.isGameMaster === true ? (
             <div className="w-[40%] my-4">
               <Link to={`/games/${gameId}/start`} onClick={startHandler} className="px-16 py-3 bg-purple-500 text-white rounded-md">
                 Start

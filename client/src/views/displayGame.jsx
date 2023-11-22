@@ -20,6 +20,9 @@ const DisplayGame = ({ question, turn, player }) => {
     <>
       <div className="w-full h-full flex justify-center items-center">
         <div className="ciclegraph relative w-[500px] h-[500px]">
+          {/* dummy doang */}
+          <UserCirlces turn={turn} />
+          <UserCirlces turn={turn} />
           <UserCirlces turn={turn} />
 
           {/* {player &&
@@ -34,7 +37,7 @@ const DisplayGame = ({ question, turn, player }) => {
         >
           <TimerBar />
           {/* bomb */}
-          <i class="fa-solid fa-bomb text-[70px] my-5"></i>
+          <i className="fa-solid fa-bomb text-[70px] my-5" />
           {/* <h1>word: {question}</h1> */}
           <h1 className="text-[20px]">
             word: <span className="font-bold">ASI</span>

@@ -22,7 +22,7 @@ function TimerBar() {
   }, []);
 
   const timerStyle = {
-    // width: `${(seconds / 5) * 100}%`, // Menghitung lebar bar sesuai dengan waktu tersisa
+    width: `${(seconds / 5) * 100}%`, // Menghitung lebar bar sesuai dengan waktu tersisa
     height: "14px",
     backgroundColor: "green",
   };
