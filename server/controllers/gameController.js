@@ -11,6 +11,7 @@ module.exports = class GameController {
           attributes: ["username"],
           as: "gameMaster",
         },
+        order: [['id', 'asc']]
       });
 
       return res.status(200).json({ games });

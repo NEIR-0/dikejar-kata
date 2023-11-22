@@ -21,7 +21,6 @@ function RoomList() {
           Authorization: "Bearer " + localStorage.access_token,
         },
       });
-      // console.log(data.games);
       setRoom(data.games);
     } catch (error) {
       console.log(error);
