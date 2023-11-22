@@ -1,7 +1,11 @@
+const path = require("path");
 const fs = require("fs");
 
-const englishWords = fs.readFileSync("../dictionary/eng-fil.txt", { encoding: "utf-8" }).split("\r\n");
-const indonesiaWords = fs.readFileSync("../dictionary/id-fil.txt", { encoding: "utf-8" }).split("\r\n");
+const eng_filename = path.join(__dirname, "../dictionary/eng-fil.txt");
+const id_filename = path.join(__dirname, "../dictionary/id-fil.txt");
+
+const englishWords = fs.readFileSync(eng_filename, { encoding: "utf-8" }).split("\r\n");
+const indonesiaWords = fs.readFileSync(id_filename, { encoding: "utf-8" }).split("\r\n");
 
 function getRandomWord(lang) {
   let wordList;

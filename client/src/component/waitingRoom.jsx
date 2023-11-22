@@ -1,10 +1,11 @@
 import BackButton from "../component/backButton";
 import TableRoom from "../component/tableRoom";
 import socket from "../socket";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function WaitingRoom({ data, player }) {
+function WaitingRoom({ data, player = [] }) {
   const { gameId } = useParams();
+
   function startHandler() {
     socket.emit("CLIENT_START", { gameId, access_token: localStorage.access_token });
   }
@@ -22,12 +23,12 @@ function WaitingRoom({ data, player }) {
             language: <span className="text-orange-400 font-bold">{data && data.language}</span>
           </p>
 
-          {/* start */}
+          {/* start */} 
           {data.isGameMaster === true ? (
             <div className="w-[40%] my-4">
-              <Link to={`/games/${gameId}/start`} onClick={startHandler} className="px-16 py-3 bg-purple-500 text-white rounded-md">
+              <button onClick={startHandler} className="px-16 py-3 bg-purple-500 text-white rounded-md">
                 Start
-              </Link>
+              </button>
             </div>
           ) : (
             ""
@@ -49,29 +50,10 @@ function WaitingRoom({ data, player }) {
                 </tr>
               </thead>
               <tbody>
-                {/* <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom />
-                <TableRoom /> */}
-
-                {player &&
-                player.map((el, index) => {
-                  return <TableRoom key={el.id} data={el} id={index + 1} />;
-                })}
+                {player && 
+                  player.map((el, index) => {
+                    return <TableRoom key={el.id} data={el} id={index + 1} />;
+                  })}
               </tbody>
             </table>
           </div>

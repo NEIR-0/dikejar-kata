@@ -11,7 +11,7 @@ module.exports = class GameController {
           attributes: ["username"],
           as: "gameMaster",
         },
-        order: [['id', 'asc']]
+        order: [["id", "asc"]],
       });
 
       return res.status(200).json({ games });
@@ -99,8 +99,9 @@ module.exports = class GameController {
 
       data = data.toJSON();
 
-      data.player_ids = data.players.map(({ id }) => id);
-      data.players = data.players.map(({ username }) => username);
+      data.players = data.players.map(({ username, id }) => {
+        return {id, username}
+      });
       data.isGameMaster = isGameMaster;
 
       return res.status(200).json({ data });

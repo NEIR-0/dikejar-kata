@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Navbar from "../component/navbar";
 
-function RoomList() {
+function Home() {
   const navigate = useNavigate();
   const [room, setRoom] = useState([]);
 
@@ -61,4 +61,4 @@ function RoomList() {
   );
 }
 
-export default RoomList;
+export default Home;

@@ -63,7 +63,16 @@ SERVER_QUESTION
 {
   "question": "string",
   "selectedUserId": "integer",
-  "selectedIndex": "integer"
+  "selectedIndex": "integer",
+  "players": [
+    {
+      "userId": "integer",
+      "username": "string",
+      "defeated": "boolean"
+    },
+    ...
+  ],
+  "startTime": "integer"
 }
 ```
 
