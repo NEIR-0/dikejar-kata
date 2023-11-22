@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import socket from "../socket";
 import DisplayGame from "../views/displayGame";
 import Winner from "./winner";
@@ -11,7 +13,7 @@ function GamePlay({ data, player }) {
   const [answer, setAnswer] = useState({
     answer: "",
   });
-  const [status, setStatus] = useState("waiting"); // playing | waiting | ended
+  const [status, setStatus] = useState("playing"); // playing | waiting | ended
   const [winner, setWinner] = useState("");
   useEffect(() => {
     socket.emit("CLIENT_READY");
@@ -54,7 +56,7 @@ function GamePlay({ data, player }) {
       {status === "playing" && (
         <section className="w-full h-screen relative flex">
           {/* layar */}
-          <div className={turn === true ? "w-[70%] h-screen bg-blue-600" : "w-full h-screen bg-blue-600 p-5 flex justify-center items-center"}>
+          <div className={turn === true ? "w-[70%] h-screen" : "w-full h-screen p-5 flex justify-center items-center"}>
             {/* game-play */}
             <DisplayGame question={question} turn={turn} player={player} />
           </div>
@@ -78,7 +80,7 @@ function GamePlay({ data, player }) {
         </section>
       )}
 
-      {status === "waiting" && <Winner winner={winner} />}
+      {status === "ended" && <Winner winner={winner} />}
     </>
   );
 }

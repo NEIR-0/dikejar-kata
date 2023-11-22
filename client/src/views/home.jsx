@@ -39,27 +39,25 @@ function RoomList() {
           <LogoutBtn logout={logout} />
         </section>
 
-        <section className="w-full h-fit mt-10 flex justify-center items-center">
+        {/* searc */}
+        <section className="w-full h-fit mt-10 flex justify-center items-center relative">
           <form className="flex justify-center items-center">
             <input className="w-[400px] h-10 rounded-s-md" type="text" />
-            <button className="py-2 px-4 bg-blue-600 rounded-e-md">
+            <button className="py-2 px-4 bg-blue-600 rounded-e-md rounded-sm">
               <i className="fa-solid fa-magnifying-glass " />
             </button>
           </form>
+          <Link to="/createRoom" className="absolute py-2 px-3 bg-white right-20">
+            +
+          </Link>
         </section>
         {/* list */}
         <section className="w-full h-fit flex justify-center items-center mt-5">
           <div className="w-[95%] flex justify-center items-center flex-wrap">
-            <CardRoom />
-            <CardRoom />
-            <CardRoom />
-            <CardRoom />
-            <CardRoom />
-
-            {/* {room &&
-                room.map((el) => {
-                  return <CardRoom key={el.id} data={el} />;
-                })} */}
+            {room &&
+              room.map((el) => {
+                return <CardRoom key={el.id} data={el} />;
+              })}
           </div>
         </section>
       </section>
