@@ -28,11 +28,10 @@ function Winner() {
 
   return (
     <>
-      <section className="w-full h-screen bg-purple-500 flex justify-center items-center relative">
-        <div className="w-[30%] h-fit p-10 rounded-lg bg-white flex justify-center items-center flex-col">
-          <h1 className="text-[40px]">winner is ..</h1>
-          <i className="fa-solid fa-user text-[100px] mt-12" />
-          <h1 className="text-[40px]">{winner}</h1>
+      <section className="winImg w-full h-screen flex justify-center items-center relative">
+        <div className="w-[20%] h-[270px] shadow-lg border border-gray-400 bg-red-500 p-10 rounded-lg flex justify-center items-center flex-col">
+          <i className="fa-solid fa-user text-[100px] mt-12t text-white" />
+          <h1 className="text-[40px] text-white">{winner}</h1>
         </div>
 
         <Link to="/" className="px-10 py-2 bg-white fixed right-10 bottom-10">

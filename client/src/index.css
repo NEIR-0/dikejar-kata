@@ -24,6 +24,16 @@ body {
   height: 100vh;
 }
 
+.winImg {
+  background-image: url("../public/win.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  overflow: auto;
+  height: 100vh;
+}
+
 .bgWaitingRooms {
   background-image: url("https://img.freepik.com/free-photo/library-with-books_1063-98.jpg?w=740&t=st=1700636742~exp=1700637342~hmac=cb25cc94cd11e61c905dede922104200d44a7b8fda8b150d6c8559de27debe07");
   background-repeat: no-repeat;
