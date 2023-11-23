@@ -2,7 +2,7 @@ const express = require("express");
 const PlayerController = require("../controllers/playerController");
 const { mustLogin } = require("../middlewares/authentication");
 const GameController = require("../controllers/gameController");
-const { errorHandlers } = require("../middlewares/errorhandlers");
+const { errorHandlers } = require("../middlewares/errorHandlers");
 const router = express.Router();
 
 router.post("/register", PlayerController.register);
