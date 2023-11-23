@@ -16,11 +16,15 @@ function Home() {
 
   const listRoom = async (e) => {
     try {
-      const { data } = await axios.get("https://dikejar-kata-server.asmodaycelestia.online/games", {
-        headers: {
-          Authorization: "Bearer " + localStorage.access_token,
-        },
-      });
+      const { data } = await axios.get(
+        // "https://dikejar-kata-server.asmodaycelestia.online/games"
+        "http://localhost:3000/games",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.access_token,
+          },
+        }
+      );
       console.log(data);
       setRoom(data.games);
     } catch (error) {

@@ -8,11 +8,16 @@ function Winner() {
 
   async function fetchResult() {
     try {
-      const { data } = await axios.get(`https://dikejar-kata-server.asmodaycelestia.online/games/${gameId}/result`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.access_token,
-        },
-      });
+      const { data } = await axios.get(
+        // `https://dikejar-kata-server.asmodaycelestia.online/games/${gameId}/result`
+        `http://localhost:3000/games/${gameId}/result`,
+
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.access_token,
+          },
+        }
+      );
 
       console.log(data);
 

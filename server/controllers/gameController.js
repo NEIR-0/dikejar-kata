@@ -155,6 +155,7 @@ module.exports = class GameController {
 
       return res.status(200).json({ data: data });
     } catch (error) {
+      console.log(error);
       return next(error);
     }
   }
@@ -232,7 +233,6 @@ module.exports = class GameController {
       }
 
       console.log(selectedGame.GameResult);
-
 
       const result = {
         winner: selectedGame.GameResult.Player.username,

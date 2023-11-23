@@ -22,7 +22,12 @@ function Register() {
   const submitUser = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("https://dikejar-kata-server.asmodaycelestia.online/register", username);
+      const { data } = await axios.post(
+        // "https://dikejar-kata-server.asmodaycelestia.online/register"
+        "http://localhost:3000/register",
+
+        username
+      );
       localStorage.access_token = data.access_token;
       localStorage.userId = data.userId; // userId
       dispatch(setUserID(data.userId));

@@ -23,18 +23,24 @@ function CreateRoom() {
   const submitUser = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("https://dikejar-kata-server.asmodaycelestia.online/games", form, {
-        headers: {
-          Authorization: "Bearer " + localStorage.access_token,
-        },
-      });
+      const { data } = await axios.post(
+        // "https://dikejar-kata-server.asmodaycelestia.online/games"
+        "http://localhost:3000/games",
+
+        form,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.access_token,
+          },
+        }
+      );
 
       navigate("/");
     } catch (error) {
       Swal2.fire({
         title: "Error",
         text: "Something has gone wrong",
-        icon: "error"
+        icon: "error",
       });
 
       console.log(error);

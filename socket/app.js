@@ -9,7 +9,8 @@ const { getRandomWord, verifyWord } = require("./helper/questions");
 
 const io = socketIo(server, {
   cors: {
-    origin: "https://dikejarkata.web.app",
+    // origin: "https://dikejarkata.web.app", // deploy
+    origin: "http://localhost:5173", // local
   },
 }); //in case server and client run on different urls
 
@@ -140,7 +141,9 @@ class Room {
       console.log(this.getRemainingPlayers()[0], "<<<<<");
 
       await axios.post(
-        `https://dikejar-kata-server.asmodaycelestia.online/games/${this.roomId}/end`,
+        // `https://dikejar-kata-server.asmodaycelestia.online/games/${this.roomId}/end`,
+        `http://localhost:3000/games/${this.roomId}/end`,
+
         {
           winnerId: this.getRemainingPlayers()[0].id,
         },
@@ -165,11 +168,15 @@ io.on("connection", (socket) => {
     const { gameId, access_token } = params;
 
     try {
-      const { data } = await axios.get("https://dikejar-kata-server.asmodaycelestia.online/games/" + gameId, {
-        headers: {
-          authorization: "Bearer " + access_token,
-        },
-      });
+      const { data } = await axios.get(
+        // "https://dikejar-kata-server.asmodaycelestia.online/games/"
+        "http://localhost:3000/games/" + gameId,
+        {
+          headers: {
+            authorization: "Bearer " + access_token,
+          },
+        }
+      );
 
       const { language, players, status } = data.data;
 
@@ -198,11 +205,16 @@ io.on("connection", (socket) => {
   socket.on("CLIENT_START", async (params) => {
     const { gameId, access_token } = params;
     try {
-      const { data } = await axios.get(`https://dikejar-kata-server.asmodaycelestia.online/games/${gameId}/start`, {
-        headers: {
-          Authorization: "Bearer " + access_token,
-        },
-      });
+      // const { data } = await axios.get(`https://dikejar-kata-server.asmodaycelestia.online/games/${gameId}/start`,
+      const { data } = await axios.get(
+        `http://localhost:3000/games/${gameId}/start`,
+
+        {
+          headers: {
+            Authorization: "Bearer " + access_token,
+          },
+        }
+      );
 
       io.to(gameId).emit("SERVER_STARTED", { data });
       const selectedRoom = Room.getRoom(gameId);
