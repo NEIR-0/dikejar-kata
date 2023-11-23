@@ -2,8 +2,13 @@ import BackButton from "../component/backButton";
 import TableRoom from "../component/tableRoom";
 import socket from "../socket";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function WaitingRoom({ data, player = [] }) {
+  const userId = useSelector((state) => {
+    return state.gameMaster.userId;
+  });
   const { gameId } = useParams();
 
   function startHandler() {
@@ -22,8 +27,11 @@ function WaitingRoom({ data, player = [] }) {
           <p className="text-[20px] text-white mb-6">
             language: <span className="text-orange-400 font-bold">{data && data.language}</span>
           </p>
+          <p className="text-[20px] text-white mb-6">
+            gameMasterID : <span className="text-orange-400 font-bold">{userId}</span>
+          </p>
 
-          {/* start */} 
+          {/* start */}
           {data.GameMasterId == localStorage.userId ? (
             <div className="w-[40%] my-4">
               <button onClick={startHandler} className="px-16 py-3 bg-purple-500 text-white rounded-md">
@@ -50,7 +58,7 @@ function WaitingRoom({ data, player = [] }) {
                 </tr>
               </thead>
               <tbody>
-                {player && 
+                {player &&
                   player.map((el, index) => {
                     return <TableRoom key={el.id} data={el} id={index + 1} />;
                   })}

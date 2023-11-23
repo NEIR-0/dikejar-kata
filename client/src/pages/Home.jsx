@@ -21,6 +21,7 @@ function Home() {
           Authorization: "Bearer " + localStorage.access_token,
         },
       });
+      console.log(data);
       setRoom(data.games);
     } catch (error) {
       Swal2.fire({

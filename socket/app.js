@@ -9,7 +9,7 @@ const { getRandomWord, verifyWord } = require("./helper/questions");
 
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://dikejarkata.web.app",
   },
 }); //in case server and client run on different urls
 
