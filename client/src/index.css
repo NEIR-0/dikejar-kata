@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #ecf0f1;
+}
+
+.bgImg {
+  background-image: url("../public/970707.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: auto;
+  height: 100vh;
+}
+
+.bgCreateRoom {
+  background-image: url("../public/lisa.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: auto;
+  height: 100vh;
+}
+
+.winImg {
+  background-image: url("../public/win.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  overflow: auto;
+  height: 100vh;
+}
+
+.bgWaitingRooms {
+  background-image: url("https://img.freepik.com/free-photo/library-with-books_1063-98.jpg?w=740&t=st=1700636742~exp=1700637342~hmac=cb25cc94cd11e61c905dede922104200d44a7b8fda8b150d6c8559de27debe07");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: auto;
+  height: 100vh;
+}
+
+/* questionImg */
+.questionImg {
+  background-image: url("../public//question.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* circles */
+.ciclegraph {
+  margin: calc(100px / 2 + 0px);
+}
+
+.ciclegraph:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid teal;
+  width: calc(100% - 2px * 2);
+  height: calc(100% - 2px * 2);
+  border-radius: 50%;
+}
+
+.ciclegraph .circle {
+  margin: calc(-100px / 2);
+}
+
+/* timer */
+.timer {
+  height: 20px;
+  background-color: lightgray;
+  transition: width 1s linear;
+}
