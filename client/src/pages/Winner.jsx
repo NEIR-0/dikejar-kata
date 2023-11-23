@@ -8,7 +8,7 @@ function Winner() {
 
   async function fetchResult() {
     try {
-      const { data } = await axios.get(`http://localhost:3000/games/${gameId}/result`, {
+      const { data } = await axios.get(`https://dikejar-kata-server.asmodaycelestia.online/games/${gameId}/result`, {
         headers: {
           Authorization: "Bearer " + localStorage.access_token,
         },

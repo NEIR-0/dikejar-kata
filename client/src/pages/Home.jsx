@@ -16,7 +16,7 @@ function Home() {
 
   const listRoom = async (e) => {
     try {
-      const { data } = await axios.get("http://localhost:3000/games", {
+      const { data } = await axios.get("https://dikejar-kata-server.asmodaycelestia.online/games", {
         headers: {
           Authorization: "Bearer " + localStorage.access_token,
         },

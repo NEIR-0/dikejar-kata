@@ -23,7 +23,7 @@ function CreateRoom() {
   const submitUser = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:3000/games", form, {
+      const { data } = await axios.post("https://dikejar-kata-server.asmodaycelestia.online/games", form, {
         headers: {
           Authorization: "Bearer " + localStorage.access_token,
         },

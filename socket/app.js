@@ -140,7 +140,7 @@ class Room {
       console.log(this.getRemainingPlayers()[0], "<<<<<");
 
       await axios.post(
-        `http://localhost:3000/games/${this.roomId}/end`,
+        `https://dikejar-kata-server.asmodaycelestia.online/games/${this.roomId}/end`,
         {
           winnerId: this.getRemainingPlayers()[0].id,
         },
@@ -165,7 +165,7 @@ io.on("connection", (socket) => {
     const { gameId, access_token } = params;
 
     try {
-      const { data } = await axios.get("http://localhost:3000/games/" + gameId, {
+      const { data } = await axios.get("https://dikejar-kata-server.asmodaycelestia.online/games/" + gameId, {
         headers: {
           authorization: "Bearer " + access_token,
         },
@@ -198,7 +198,7 @@ io.on("connection", (socket) => {
   socket.on("CLIENT_START", async (params) => {
     const { gameId, access_token } = params;
     try {
-      const { data } = await axios.get(`http://localhost:3000/games/${gameId}/start`, {
+      const { data } = await axios.get(`https://dikejar-kata-server.asmodaycelestia.online/games/${gameId}/start`, {
         headers: {
           Authorization: "Bearer " + access_token,
         },
