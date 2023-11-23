@@ -40,6 +40,7 @@ class Room {
     // waiting stage
     this.isGameStarted = false;
     this.playerReadyCount = 0;
+    this.gameMasterToken;
 
     // playing stage
     this.currentIndex;
@@ -48,8 +49,6 @@ class Room {
     this.timeout = null;
   }
 
-  waitPlayers() {}
-
   playerReady() {
     this.playerReadyCount++;
 
@@ -57,7 +56,6 @@ class Room {
       this.startGame();
     }
 
-    // todo: comment this
     this.startGame();
   }
 
@@ -87,6 +85,8 @@ class Room {
       duration: this.currentDuration,
     });
 
+    clearTimeout(this.timeout);
+
     this.timeout = setTimeout(() => {
       console.log("timeout");
       this.timesUp();
@@ -94,21 +94,19 @@ class Room {
   }
 
   timesUp() {
-    // this.players[this.currentIndex].isDefeated = true;
-    io.to(this.roomId).emit("SERVER_TIMEOUT");
-
     this.players[this.currentIndex].isDefeated = true;
+    io.to(this.roomId).emit("SERVER_TIMEOUT");
 
     this.nextTurn();
   }
 
-  answer(userId, answer) {
-    if (userId === this.currentUserId) {
-      if (verifyWord(answer)) {
-        io.to(this.roomId).emit("SERVER_CORRECT", { userId, answer });
-        clearTimeout(this.timeout);
-
+  answer(userId, answer, socket) {
+    if (userId == this.currentUserId) {
+      if (verifyWord(this.language, answer)) {
+        io.to(socket.id).emit("SERVER_CORRECT");
         this.nextTurn();
+      } else {
+        io.to(socket.id).emit("SERVER_WRONG");
       }
     }
   }
@@ -122,10 +120,41 @@ class Room {
     }
 
     this.currentIndex = nextIndex;
-    console.log(nextIndex, "<<<<");
 
-    // todo check how many players left
-    this.question();
+    if (this.getRemainingPlayers().length > 1) {
+      this.question();
+    } else {
+      this.gameover();
+    }
+  }
+
+  getRemainingPlayers() {
+    return this.players.filter((player) => !player.isDefeated);
+  }
+
+  async gameover() {
+    try {
+      io.to(this.roomId).emit("SERVER_GAMEOVER");
+      clearTimeout(this.timeout);
+
+      console.log(this.getRemainingPlayers()[0], "<<<<<");
+
+      await axios.post(
+        `http://localhost:3000/games/${this.roomId}/end`,
+        {
+          winnerId: this.getRemainingPlayers()[0].id,
+        },
+        {
+          headers: {
+            authorization: "Bearer " + this.gameMasterToken,
+          },
+        }
+      );
+
+      io.to(this.roomId).emit("SERVER_RESULT");
+    } catch (error) {
+      console.log(error.response);
+    }
   }
 }
 
@@ -142,20 +171,27 @@ io.on("connection", (socket) => {
         },
       });
 
-      const { language, players } = data.data;
+      const { language, players, status } = data.data;
 
-      const selectedRoom = Room.getRoom(gameId);
-      if (selectedRoom) {
-        selectedRoom.players = players;
-      } else {
-        Room.createRoom(gameId, language, players);
+      if (status === "waiting") {
+        const selectedRoom = Room.getRoom(gameId);
+        if (selectedRoom) {
+          selectedRoom.players = players;
+        } else {
+          Room.createRoom(gameId, language, players);
+        }
       }
 
       socket.join(gameId);
       io.to(gameId).emit("SERVER_JOINED", data);
     } catch (error) {
-      // room penuh
-      console.log(error);
+      // todo: room penuh
+      // todo: game telah dimulai
+      // todo: game tidak ditemukan
+
+      setTimeout(() => {
+        io.to(socket.id).emit("SERVER_ERROR", error?.response?.data?.message);
+      }, 100);
     }
   });
 
@@ -169,7 +205,10 @@ io.on("connection", (socket) => {
       });
 
       io.to(gameId).emit("SERVER_STARTED", { data });
+      const selectedRoom = Room.getRoom(gameId);
+      selectedRoom.gameMasterToken = access_token;
     } catch (error) {
+      // todo error ke
       console.log(error);
     }
   });
@@ -184,8 +223,10 @@ io.on("connection", (socket) => {
   socket.on("CLIENT_ANSWER", (params) => {
     const { gameId, userId, answer } = params;
 
+    console.log(answer, "jawab");
+
     const selectedRoom = Room.getRoom(gameId);
-    selectedRoom.answer(userId, answer);
+    selectedRoom.answer(userId, answer, socket);
   });
 
   socket.on("disconnect", (reason) => {

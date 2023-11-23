@@ -10,6 +10,8 @@ router.get("/games", [mustLogin], GameController.getGames);
 router.post("/games", [mustLogin], GameController.createGame);
 router.get("/games/:gameId", [mustLogin], GameController.getGame);
 router.get("/games/:gameId/start", [mustLogin], GameController.startGame);
+router.post("/games/:gameId/end", [mustLogin], GameController.endGame);
+router.get("/games/:gameId/result", [mustLogin], GameController.getResult);
 
 router.use(errorHandlers);
 

@@ -23,6 +23,11 @@ function Home() {
       });
       setRoom(data.games);
     } catch (error) {
+      Swal2.fire({
+        title: "Error",
+        text: "Something has gone wrong",
+        icon: "error",
+      });
       console.log(error);
     }
   };

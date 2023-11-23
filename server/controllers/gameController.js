@@ -1,4 +1,4 @@
-const { Game, GamePlayer, Player } = require("../models");
+const { Game, GamePlayer, Player, GameResult } = require("../models");
 
 module.exports = class GameController {
   static async getGames(req, res, next) {
@@ -100,7 +100,7 @@ module.exports = class GameController {
       data = data.toJSON();
 
       data.players = data.players.map(({ username, id }) => {
-        return {id, username}
+        return { id, username };
       });
       data.isGameMaster = isGameMaster;
 
@@ -154,6 +154,91 @@ module.exports = class GameController {
       data.players = data.players.map(({ username }) => username);
 
       return res.status(200).json({ data: data });
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async endGame(req, res, next) {
+    try {
+      const { gameId } = req.params;
+      const { userId } = req;
+
+      const { winnerId } = req.body;
+
+      if (!gameId) {
+        throw { name: "notFound", message: "Game not found" };
+      }
+
+      const selectedGame = await Game.findByPk(gameId, {
+        attributes: ["id", "GameMasterId", "status"],
+      });
+
+      if (!selectedGame) {
+        throw { name: "notFound", message: "Game not found" };
+      }
+
+      if (selectedGame.GameMasterId != userId) {
+        throw { name: "forbidden", message: "You are not the game master" };
+      }
+
+      if (selectedGame.status === "waiting") {
+        throw { name: "notFound", message: "Game not started yet" };
+      }
+
+      if (selectedGame.status === "ended") {
+        throw { name: "notFound", message: "Game already ended" };
+      }
+
+      await selectedGame.update({ status: "ended" });
+
+      await GameResult.create({
+        GameId: gameId,
+        WinnerId: winnerId,
+      });
+
+      return res.status(200).json({ message: "OK" });
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getResult(req, res, next) {
+    try {
+      const { gameId } = req.params;
+
+      if (!gameId) {
+        throw { name: "notFound", message: "Game not found" };
+      }
+
+      const selectedGame = await Game.findByPk(gameId, {
+        attributes: ["id", "GameMasterId", "status"],
+        include: {
+          model: GameResult,
+          attributes: ["WinnerId"],
+          include: {
+            model: Player,
+            attributes: ["id", "username"],
+          },
+        },
+      });
+
+      if (!selectedGame) {
+        throw { name: "notFound", message: "Game not found" };
+      }
+
+      if (!selectedGame.GameResult) {
+        throw { name: "notFound", message: "Game not ended" };
+      }
+
+      console.log(selectedGame.GameResult);
+
+
+      const result = {
+        winner: selectedGame.GameResult.Player.username,
+      };
+
+      return res.status(200).json({ result });
     } catch (error) {
       return next(error);
     }

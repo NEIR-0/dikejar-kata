@@ -294,7 +294,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 6. GET /games/:gameId/result
+## 7. GET /games/:gameId/result
 
 Description:
 
@@ -310,27 +310,11 @@ _Response (200 - OK)_
 }
 ```
 
-_Response (401 - Unauthorized)_
+_Response (404 - Not Found)_
 
 ```json
 {
-  "message": "Not registered"
-}
-```
-
-_Response (401 - Unauthorized)_
-
-```json
-{
-  "message": "Invalid token"
-}
-```
-
-_Response (403 - Forbidden)_
-
-```json
-{
-  "message": "Forbidden"
+  "message": "Game not found"
 }
 ```
 
@@ -338,7 +322,7 @@ _Response (404 - Not Found)_
 
 ```json
 {
-  "message": "Game not found"
+  "message": "Game not ended"
 }
 ```
 

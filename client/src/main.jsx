@@ -7,8 +7,11 @@ import Register from "./pages/Register.jsx";
 import Home from "./pages/Home.jsx";
 import CreateRoom from "./pages/CreateRoom.jsx";
 import Game from "./pages/Game.jsx";
-import Winner from "./views/winner.jsx";
+import Winner from "./pages/winner.jsx";
 import GamePlay from "./views/gameplay.jsx";
+
+import { store } from "./store.js";
+import { Provider } from "react-redux";
 
 const auth = () => {
   if (!localStorage.access_token) {
@@ -42,15 +45,9 @@ const router = createBrowserRouter([
         loader: auth,
       },
 
-      // dummy
       {
-        path: "Winner",
+        path: "/games/:gameId/result",
         element: <Winner />,
-        loader: auth,
-      },
-      {
-        path: "gamestart",
-        element: <GamePlay />,
         loader: auth,
       },
     ],
@@ -58,7 +55,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
-  <RouterProvider router={router} />
-  // </React.StrictMode>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

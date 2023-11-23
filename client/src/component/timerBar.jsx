@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-function TimerBar() {
-  const [seconds, setSeconds] = useState(5);
+function TimerBar({ startTime, duration }) {
+  const endTime = startTime + duration;
+  const timeLeft = endTime - Date.now();
+
+  const [seconds, setSeconds] = useState();
 
   useEffect(() => {
+    setSeconds(timeLeft);
+
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
         if (prevSeconds > 0) {
-          console.log("masuk");
-          return prevSeconds - 1;
+          return prevSeconds - 1000;
         } else {
-          console.log("berhenti");
           clearInterval(interval); // Hentikan interval jika waktu sudah mencapai 0 detik
           return 0;
         }
@@ -19,10 +22,10 @@ function TimerBar() {
 
     // Membersihkan interval setelah komponen unmount atau timer mencapai 0
     return () => clearInterval(interval);
-  }, []);
+  }, [timeLeft]);
 
   const timerStyle = {
-    width: `${(seconds / 5) * 100}%`, // Menghitung lebar bar sesuai dengan waktu tersisa
+    width: `${(seconds / duration) * 100}%`, // Menghitung lebar bar sesuai dengan waktu tersisa
     height: "14px",
     backgroundColor: "green",
   };
