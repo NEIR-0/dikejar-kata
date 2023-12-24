@@ -1,5 +1,6 @@
 # Dikejar Kata
-![Alt text](image.png)
+![image](https://github.com/NEIR-0/dikejar-kata/assets/105973474/ec8a6fc4-b5eb-4890-b0b0-e56cf53afc3b)
+
 
 This website will give you an exciting experience in the world of words and games that sharpen the brain. "Word Chased" is an innovative project that offers a unique challenge, where users are given several letters that must be arranged into the correct word. We use third-party API services to validate words, ensuring each game is fair and accurate. "Chased by Words" supports Indonesian and English in its gameplay
 
